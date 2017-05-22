@@ -1,0 +1,90 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<nav class="navbar-inverse navbar-fixed-top">
+
+    <a href="#" class="toggle-menu">&#9776;</a>
+    <ul class="nav-list nav-open" id="nav">
+    
+    <c:choose>
+      <c:when test="${sessionScope.user == null}">
+        <li>
+          <a href="${pageContext.request.contextPath}">
+            <span class="glyphicon glyphicon-home"></span>&nbsp; Home</a>
+        </li> 
+      </c:when>
+      
+      <c:otherwise>
+        <li class="has-submenu"><a href="#"><span class="glyphicon glyphicon-list"></span>&nbsp; Menu</a>
+          <c:choose>
+            <c:when test="${sessionScope.user.role.name == 'applicant'}">
+              <ul>
+                <li><a href="viewMyProfile">View Profile</a></li>
+                <li><a href="editProfile">Edit Profile</a></li>
+                <li><a href="viewJobPostings">Browse Jobs</a></li>
+                <li><a href="applicantViewJobApps">Job Applications</a></li>
+                <li><a href="viewInterviews">Upcoming Interviews</a></li>
+                
+                <li><a href="createOrEditJobView?jobId=">Create Job Posting (TEST)</a></li>
+                <li><a href="viewAllJobs">Your Posted Jobs (TEST)</a></li>
+              </ul>
+            </c:when>
+            <c:when test="${sessionScope.user.role.name == 'recruiter'}">
+              <ul>
+                <li><a href="viewAllJobs">Browse All Jobs</a></li>
+                <li><a href="createOrEditJobView?jobId=">Create Job Posting</a></li>
+                <li><a href="viewAllRecruiterJobs">Your Posted Jobs</a></li>
+                <li><a href="recruiterViewInterviews">Upcoming Interviews</a></li>
+                <li><a href="viewStatistics">View Statistics</a></li>
+              </ul>
+            </c:when>
+            <c:when test="${sessionScope.user.role.name == 'admin'}">
+              <ul>
+                <li><a href="viewUsers">View All Users</a></li>
+                <li><a href="createUser">Create New User</a></li>
+                <li><a href="userLog">View User Log</a></li>
+                <li><a href="systemLog">View System Log</a></li>
+              </ul>
+            </c:when>
+            <c:when test="${sessionScope.user.role.name == 'staff'}">
+              <ul>
+                <li><a href="viewAllJobs">Browse Jobs</a></li>
+                <li><a href="viewInvitation">Current Invitations</a></li>
+                <li><a href="recruiterViewInterviews">Upcoming Interviews</a></li> 
+              </ul>
+            </c:when>
+          </c:choose>
+        </li>
+      </c:otherwise>
+    </c:choose>
+    
+    <li><a href="http://www.fdmgroup.com/ca/about/" target="_blank">
+      <span class="glyphicon glyphicon-info-sign"></span>&nbsp;About</a></li>
+    
+	<li class="has-logo">
+      <div class="site-title">
+        <a href="http://www.fdmgroup.com/ca/" target="_blank">
+  		    <img src="http://www.jobs.ie/logos/fdm-group-2586957.png" alt="smashtheshell">
+		</a>
+      </div>
+    </li>
+    
+    <c:choose>
+      <c:when test="${sessionScope.user == null}">
+        <li class="has-submenu"><a href="register"><span class="glyphicon glyphicon-user"></span>&nbsp;Register</a></li>
+        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
+      </c:when>
+      <c:otherwise>
+      
+      <li class="has-submenu"><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Dashboard</a></li>
+      
+      <li class="has-submenu"><a href="#"><span class="glyphicon glyphicon-dashboard"></span>${sessionScope.user.firstName} ${sessionScope.user.lastName}</a>
+          <ul>
+            <li><a href="editCurrentUser"><span class="glyphicon glyphicon-user"></span>View Account</a>
+            <li><a href="editCurrentUser"><span class="glyphicon glyphicon-cog"></span>Edit Account</a>
+            <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+          </ul>
+  		</li>
+      </c:otherwise>
+    </c:choose>
+  </ul>
+</nav>

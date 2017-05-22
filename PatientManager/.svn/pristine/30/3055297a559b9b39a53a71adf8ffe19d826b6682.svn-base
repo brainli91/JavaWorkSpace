@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>372</x>
+      <y>78</y>
+      <w>204</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>TRANSACTION
+--
+PK          TRANSACTION_ID:                   LONG
+FK          USER_ID:                                  LONG
+               DEPOSITE_WITHDRAW:         	VARCHAR2
+               AMOUNT:                                  NUMBER
+               DATE: 	                                      DATE        
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>234</x>
+      <y>174</y>
+      <w>174</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>USER
+--
+PK  USER_ID:           LONG
+       EMAIL: 	              VARCHAR2
+       PASSWORD:     VARCHAR2
+       FIRST_NAME:   VARCHAR2
+       LAST_NAME:    VARCHAR2
+       ACTIVE:             INTEGER
+       FULL_NAME:    VARCHAR2
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>324</y>
+      <w>138</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>ROLE
+--
+PK   ROLE_ID:          LONG
+       ROLE_NAME:    	VARCHAR2
+
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>258</y>
+      <w>30</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>174</y>
+      <w>198</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>APPOINTMENTS
+--
+PK     APPOINTMENT_ID:                   LONG
+          USER_ID (PATIENT)                 LONG
+          USER_ID  (PRACTITIONER)     LONG
+          STATUS:    	                                VARCHAR2
+          TYPE_ID:                                    LONG
+          DATE:                                        DATE
+          DURATION:                              NUMBER(2)
+          
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>210</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>228</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>408</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>PROFILE
+--
+PROFILE_ID:                        LONG
+USER_ID:                             LONG
+ADDRESS:                           VARCHAR2
+PRIMARY_PHONE:             VARCHAR2
+SECSONDARY_PHONE:     VARCHAR2
+DISEASES:                           VARCHAR2
+
+
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>312</y>
+      <w>156</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>APPOINTMENT_TYPE
+--
+TYPE_ID:       LONG
+TYPE_NAME: 	   VARCHAR2
+HOURLY_COST:    NUMBER
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>264</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>258</y>
+      <w>72</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>90.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>246</y>
+      <w>72</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>108</y>
+      <w>72</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>642</x>
+      <y>78</y>
+      <w>138</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>CREDIT
+--
+PK       CREDIT_ID:        LONG   
+FK       USER_ID:           LONG
+            CREDIT:            	NUMBER
+          
+              
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>108</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

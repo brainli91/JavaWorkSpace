@@ -1,0 +1,24 @@
+package com.fdmgroup.entity;
+
+
+public class Appointment implements IStorable{
+
+	
+	private long id;
+	
+	private long patient_id;
+	
+	private long practitioner_id;
+	
+	private AppointmentStatus status;
+	
+	private AppointmentType type;
+	
+	
+	
+	
+	
+	
+	
+	
+}

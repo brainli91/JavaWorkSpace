@@ -1,0 +1,107 @@
+@CHARSET "ISO-8859-1";
+
+p, h1 {
+	color: red;
+	font-family: Monsieur La Doulaise;
+}
+
+#googlePara{
+	color: green;
+	background-color: #FF3399;
+}
+
+.center {
+	text-align: center;
+}
+
+.marked {
+	color: blue;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	visibility: visible;
+}
+
+div {
+	overflow: auto;
+	width: 10%;
+	border: 2px dashed;
+	resize: both;
+	border-radius: 20px;
+	background-color: orange;
+	box-shadow: 10px 10px 5px #888888;
+	transition: width 0.5s;
+}
+
+div:HOVER {
+	width: 100%;
+}
+
+.col {
+	-webkit-column-count: 5;
+    -webkit-column-gap: 40px;
+    -webkit-column-rule: 3px outset #ff00ff;
+	
+	-moz-column-count: 5;
+    -moz-column-gap: 40px;
+    -moz-column-rule: 3px outset #ff00ff;
+    
+	-column-count: 5;
+    -column-gap: 40px;
+    -column-rule: 3px outset #ff00ff; 
+}
+
+
+/* The order is important. Must be link -> visited -> hover -> active */
+a:LINK {
+	color: green;
+}
+a:VISITED {
+	color: red;
+}
+a:HOVER {
+	color: yellow;
+}
+a:ACTIVE {
+	color: gray;
+}
+
+p::FIRST-LETTER {
+	/* size: 2cm; */
+	font-size: xx-large;
+	color: #98AA32;
+	font-family: cursive;
+}
+
+h1::BEFORE {
+	content: url(../images/apple.png);
+}
+
+h1::AFTER {
+	content: url(../images/apple.png);
+}
+
+img {
+	position: relative;
+	/* float: right; */
+	clear: right;
+	opacity: 0.4;
+	cursor: crosshair;
+}
+
+ul {
+	list-style-type: katakana;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px)
+{ 
+	body	 { 
+		background-color: black; 
+		color: springgreen; 
+	}	
+	div	{      
+		-webkit-column-count: 2; 
+   		-webkit-column-gap: 40px; 
+   		-webkit-column-rule: 3px outset #ff00ff;
+	} 
+}

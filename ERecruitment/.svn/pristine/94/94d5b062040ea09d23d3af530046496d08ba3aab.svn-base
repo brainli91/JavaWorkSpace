@@ -1,0 +1,23 @@
+package com.fdmgroup.model;
+
+public enum InvitationStatus {
+
+  PENDING("Pending"), ACCEPTED("Accepted"), REJECTED("Rejected");
+
+  private String name;
+
+  public static InvitationStatus getByName(String s) {
+    if (s == null) {
+      return null;
+    }
+    return valueOf(s.toUpperCase());
+  }
+
+  InvitationStatus(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+}

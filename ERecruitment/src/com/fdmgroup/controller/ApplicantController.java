@@ -1,0 +1,314 @@
+package com.fdmgroup.controller;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fdmgroup.dao.ApplicantProfileDAO;
+import com.fdmgroup.dao.InterviewDAO;
+import com.fdmgroup.dao.JobApplicationDAO;
+import com.fdmgroup.dao.JobDAO;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.model.ApplicantProfile;
+import com.fdmgroup.model.Education;
+import com.fdmgroup.model.Interview;
+import com.fdmgroup.model.InterviewResult;
+import com.fdmgroup.model.Job;
+import com.fdmgroup.model.JobApplication;
+import com.fdmgroup.model.JobStatus;
+import com.fdmgroup.model.User;
+import com.fdmgroup.model.WorkHistory;
+import com.fdmgroup.ranking.Keyword;
+import com.fdmgroup.ranking.ResumeRank;
+
+@Controller
+@SessionAttributes(names = {"user"}, types = { User.class})
+public class ApplicantController {
+
+	@Autowired
+	JobDAO jobDAO;
+	
+	@Autowired
+	UserDAO userDAO;
+	
+	@Autowired
+	InterviewDAO interviewDAO;
+	
+	@Autowired
+	JobApplicationDAO jobAppDAO;
+	
+	@Autowired
+	ApplicantProfileDAO applicantProfileDAO;
+	
+	@Autowired
+	HttpServletRequest request;
+	
+	@RequestMapping(value = "/applicantDashboard", method = RequestMethod.GET)
+	public String loadApplicantDashboard(Model model, @ModelAttribute User user) {
+		List<Job> topFiveJobs = null;
+		List<Interview> topFiveInterviews = null;
+		List<Job> jobs = jobDAO.findAll();
+		User applicant = userDAO.read(user.getId());
+		Set<JobApplication> jobApps = userDAO.read(user.getId()).getJobApplications();
+		List<Interview> interviews = interviewDAO.findUserInterviews(applicant);
+		int jobCount = 5;
+		int interviewCount = 5;
+		boolean toAddToList = true;
+		
+		if(!(jobs==null)){
+			topFiveJobs = new ArrayList<>();
+			Collections.reverse(jobs);
+			Iterator<Job> jobIter = jobs.iterator();
+			while(jobIter.hasNext() && jobCount > 0) {
+				Job job = jobIter.next();
+				if(job.getStatus().equals(JobStatus.ACTIVE)) {
+					toAddToList = true;
+					for(JobApplication j:jobApps){
+						if(j.getJob().equals(job))
+							toAddToList = false;
+					}
+					
+					if(toAddToList){
+						topFiveJobs.add(job);
+						jobCount--;
+					}
+				}
+			}
+		}
+		
+		if(!(interviews==null)){
+			topFiveInterviews = new ArrayList<>();
+			Collections.reverse(interviews);
+			Iterator<Interview>interviewIter =  interviews.iterator();
+			while(interviewIter.hasNext() && interviewCount > 0) {
+				Interview interview = interviewIter.next();
+				if(interview.getResult().equals(InterviewResult.PENDING)) {
+					topFiveInterviews.add(interview);
+					interviewCount--;
+				}
+			}
+		}
+		
+		model.addAttribute("jobs", topFiveJobs);
+		model.addAttribute("interviews", topFiveInterviews);
+		
+		return "applicant_dashboard";
+	}
+	
+	@RequestMapping(value = "/viewJobPostings", method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewJobPostings(Model model, @ModelAttribute User user) {
+		List<Job> jobs = jobDAO.findAll();
+		ListIterator<Job> jobsListIter = jobs.listIterator();
+		Set<JobApplication> jobApps = userDAO.read(user.getId()).getJobApplications();
+		Iterator<JobApplication> jobAppsIter = jobApps.iterator();
+		
+		while(jobsListIter.hasNext()) {
+			Job job = jobsListIter.next();
+			if(!job.getStatus().equals(JobStatus.ACTIVE))
+				jobsListIter.remove();
+		}
+		
+		while(jobAppsIter.hasNext()) {
+			JobApplication jobApp = jobAppsIter.next();
+			if(jobs.contains(jobApp.getJob()))
+				jobs.remove(jobApp.getJob());
+		}
+		
+		model.addAttribute("jobs", jobs);
+		return "view_all_jobs_applicant";
+	}
+	
+	@RequestMapping(value = "/applicantViewJob", method = RequestMethod.GET)
+	public String viewJobDetails(Model model, @RequestParam String jobId) {
+		if(jobId == null || jobId.equals("")) {
+			model.addAttribute("errorMsg", "No job input provided.");
+			return "view_all_jobs_applicant";
+		}
+		else {
+			long id = Long.parseLong(jobId);
+			Job job = jobDAO.read(id);
+			
+			if(job == null) {
+				model.addAttribute("errorMsg", "Given job does not exist");
+				return "view_all_jobs_applicant";
+			}
+			else {
+				model.addAttribute("job", job);
+				return "view_job_post";
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/applicantViewApplication", method = RequestMethod.GET)
+	public String viewJobDetails(Model model,@ModelAttribute User user, @RequestParam String jobId, @RequestParam String applicationStatus) {
+		if(jobId == null || jobId.equals("")) {
+			model.addAttribute("errorMsg", "No job input provided.");
+			return "view_all_jobs_applicant";
+		}
+		else {
+			long id = Long.parseLong(jobId);
+			Job job = jobDAO.read(id);
+			
+			if(job == null) {
+				model.addAttribute("errorMsg", "Given job application does not exist");
+				return "view_all_jobs_applicant";
+			}
+			else {
+				model.addAttribute("job", job);
+				model.addAttribute("applicationStatus", applicationStatus);
+				return "view_job_application";
+			}
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "/applicantViewJobApps", method = RequestMethod.GET)
+	public String viewJobApplications(Model model, @ModelAttribute User user) {
+		User applicant = userDAO.read(user.getId());
+		Set<JobApplication> jobApplications = applicant.getJobApplications();
+		
+		model.addAttribute("jobApps", jobApplications);
+		
+		return "view_applied_jobs";
+	}
+	
+	@RequestMapping(value = "/applicantViewInterviews", method = RequestMethod.GET)
+	public String viewApplicantInterviews(Model model, @ModelAttribute User user) {
+		User applicant = userDAO.read(user.getId());
+		List<Interview> interviews = interviewDAO.findUserInterviews(applicant);
+		
+		model.addAttribute("interviews", interviews);
+		
+		return "view_all_interviews"; //this might change later as we get a new interview jsp page created for all users - Sammy
+	}
+	
+	@RequestMapping(value = "/applyForJob", method = RequestMethod.POST)
+	public String applyForJob(Model model, @ModelAttribute User user, @RequestParam String jobId) {
+		if(jobId == null || jobId.equals("")) {
+			model.addAttribute("errorMsg", "No job provided to apply for");
+			return viewJobPostings(model, user);
+		}
+		else if(user.getBlocked() == 1) {
+			model.addAttribute("errorMsg", "Your account is blocked. You cannot apply for any more jobs.");
+			return "forward:/viewJobPostings";
+		}
+		else {
+			long id = Long.parseLong(jobId);
+			User applicant = userDAO.read(user.getId());
+			Job job = jobDAO.read(id);
+			
+			if(job == null) {
+				model.addAttribute("errorMsg", "Job does not exist");
+				return viewJobPostings(model, user);
+			}
+			
+			if(applicant.getApplicantProfile().getResume()==null){
+				model.addAttribute("errorMsg","You cannot apply for a job until you have uploaded your resume.");
+				return viewJobPostings(model, user);
+			}
+			
+			Set<JobApplication> appliedFor = applicant.getJobApplications();
+			for(JobApplication ja: appliedFor){
+				if(ja.getJob().equals(job)){
+					model.addAttribute("errorMsg", "You cannot apply for a job twice");
+					return viewJobPostings(model, user);
+				}
+			}
+			JobApplication jobApp = new JobApplication(applicant, job);
+			
+			String keywords = job.getKeywords();
+			String[] keywordArray = keywords.split(",");
+			List<Keyword> keywordList = new ArrayList<>();
+			for (String keyword : keywordArray) {
+				keywordList.add(new Keyword(keyword));
+			}
+			ApplicantProfile ap = applicantProfileDAO.getProfileByUserId(user.getId());
+			String appResumePath = ap.getResume().getFilePath();
+			ResumeRank rr = null;
+			
+			if(appResumePath != null && !appResumePath.equals("")) {
+				String path = request.getServletContext().getRealPath("/");
+				File appResume = new File(path + appResumePath);
+				rr = new ResumeRank(keywordList, appResume);
+			}
+			else {
+				String content = "";
+				List<Education> educationList = ap.getEducation();
+				List<WorkHistory> workHistoryList = ap.getWorkHistory();
+				Iterator<Education> iterEducation = educationList.iterator();
+				Iterator<WorkHistory> iterWorkHistory = workHistoryList.iterator();
+				
+				content += ap.getAddress() + ";";
+				content += ap.getPrimaryPhone() + ";";
+				content += (ap.getSecondaryPhone() == null || ap.getSecondaryPhone().equals("")) ? "" : ap.getSecondaryPhone() + ";";
+				content += (ap.getSkills() == null || ap.getSkills().equals("")) ? "" : ap.getSkills() + ";";
+				
+				if(iterEducation.hasNext()) {
+					Education education = iterEducation.next();
+					
+					content += education.getInstitution() + "|";
+					content += education.getStartDate() + "|";
+					content += education.getEndDate() + "|";
+					content += education.getDegree() + "|";
+					content += education.getProgram() + ";";
+				}
+				
+				if(iterWorkHistory.hasNext()) {
+					WorkHistory workHistory = iterWorkHistory.next();
+					
+					content += workHistory.getEmployer() + "|";
+					content += workHistory.getTitle() + "|";
+					content += workHistory.getStartDate() + "|";
+					content += workHistory.getEndDate() + "|";
+					if(iterWorkHistory.hasNext())
+						content += workHistory.getDescription() + "|";
+					else
+						content += workHistory.getDescription() + ";";
+				}
+				
+				content += ap.getInterests();
+				
+				rr = new ResumeRank(keywordList, content);
+			}
+//			float score = normalizeScore(rr.rankResumeByPercent(), 0, 75);
+			float score = rr.rankResumeByPercent();
+			jobApp.setScore(score);
+
+			jobApp = jobAppDAO.create(jobApp);
+
+			if(jobApp == null) {
+				model.addAttribute("errorMsg", "Job application cannot be created.");
+				return viewJobPostings(model, user);
+			}
+
+			user.getJobApplications().add(jobApp);
+			job.getJobApplications().add(jobApp);
+				
+			model.addAttribute("successMsg", "Congratulations! You have successfully applied for: " + job.getTitle() + "!");
+			return viewJobPostings(model, user);
+		}
+	}
+	
+	private float normalizeScore(float score, float min, float max) {
+		  float newScore = ((score - min) / (max - min)) * 100;
+		  System.out.println("Score: " + newScore);
+		  return newScore;
+	}
+
+}

@@ -1,0 +1,30 @@
+.errorMessage {
+       
+       width:70%;
+       margin-left: auto;
+       margin-right: auto;       
+       font-size: 150%;
+       font-family: courier !important ;
+      
+}
+
+
+.success{
+	
+	width:50%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:left;
+	font-size: 150%;
+	font-family:  courier !important;
+}
+
+.errorOnCorner{
+	width:75%;
+	/* margin-right: 30%; */
+	/* text-align: center; */
+	font-size: 28px;
+	
+}
+ 
+

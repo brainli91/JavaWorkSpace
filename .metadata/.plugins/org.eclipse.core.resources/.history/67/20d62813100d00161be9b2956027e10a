@@ -1,0 +1,56 @@
+import java.sql.Date;
+
+import com.fdmgroup.tradingplatform.controller.ShareholderController;
+import com.fdmgroup.tradingplatform.dao.CollectionCompanyDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionRequestDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionTradeDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionUserDAO;
+import com.fdmgroup.tradingplatform.model.Company;
+import com.fdmgroup.tradingplatform.model.Request;
+import com.fdmgroup.tradingplatform.model.Trade;
+import com.fdmgroup.tradingplatform.model.User;
+
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		ShareholderController sh = new ShareholderController();
+		Role r = new Role()
+		User us = new User("martin123", "Martin", "Ogor", "mo1234", null);
+		User us2 = new User("lisibo", "Brian", "Li", "sli106", "Shareholder");
+		
+		CollectionUserDAO userdao = CollectionUserDAO.getInstance();
+		CollectionCompanyDAO companydao = CollectionCompanyDAO.getInstance();
+		CollectionRequestDAO requestdao = CollectionRequestDAO.getInstance();
+		CollectionTradeDAO tradedao = CollectionTradeDAO.getInstance();
+		
+		
+		Date transactionTime = new Date(2016,04,25);
+		Company company = new Company(123, "Apple", 120.12);
+		companydao.create(company);
+		Request buyRequest = new Request(null, 100, us, transactionTime, "BUY", "Active", company, 100, 100, "GOOD UNTIL CANCELLED", null, null);
+		requestdao.create(buyRequest);
+		Trade tr = new Trade(company, transactionTime, 100, 5.09, 20000.00, us, null, buyRequest, null);
+		tradedao.create(tr);
+		
+		
+		Request sellRequest = new Request(null, 60, us, transactionTime, "SELL", "Active", company, 60, 60, "GOOD UNTIL CANCELLED", null, null);
+		requestdao.create(buyRequest);
+		Trade trsell = new Trade(company, transactionTime, 60, 5.09, 20000.00, us, null, null, sellRequest);
+		tradedao.create(trsell);
+		
+		userdao.create(us);
+		String pro = sh.profile(us);
+		System.out.println(pro);
+		
+		sh.portfolio(us);
+		
+		changeProfile (User userAttribute)
+		
+		
+	}
+	
+	
+
+}

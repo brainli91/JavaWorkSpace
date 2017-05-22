@@ -1,0 +1,1 @@
+To address the coupling, it is recommended to define an interface in package A which is implemented by class in package B. Then object of class A can refer to interface in package A . This is often an example in "inversion of dependency

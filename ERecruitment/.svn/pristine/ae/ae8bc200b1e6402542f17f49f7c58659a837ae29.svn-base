@@ -1,0 +1,67 @@
+package com.fdmgroup.controller;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.aop.aspectj.InstantiationModelAwarePointcutAdvisor;
+import org.springframework.ui.Model;
+
+import com.fdmgroup.dao.StaffInterviewDAO;
+import com.fdmgroup.model.StaffInterview;
+import com.fdmgroup.model.User;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.*;
+
+public class StaffInterviewControllerTest {
+	
+	@Mock
+	StaffInterviewDAO staffInterviewDAO;
+	
+	@Mock
+	List<StaffInterview> invitationList;
+	
+	@Mock
+	Model model;
+	
+	@Mock
+	User user;
+	
+	@Mock
+	StaffInterview staffInterView;
+	
+	@InjectMocks
+	StaffController staffInterviewController;
+	
+	
+	@Before
+	public void setup(){
+		staffInterviewController = new StaffController();
+		initMocks(this);
+	}
+	
+	
+	@Test
+	public void testViewNoneInvitation(){
+		when(invitationList.isEmpty()).thenReturn(true);
+		when(staffInterviewDAO.viewStaffInterviewByUser(user)).thenReturn(invitationList);
+		String view = staffInterviewController.viewInvitation(model, user);
+		assertEquals("dashboard", view);
+	}
+	
+	@Test
+	public void testViewExistingInvitation(){
+		when(invitationList.isEmpty()).thenReturn(false);
+		when(staffInterviewDAO.viewStaffInterviewByUser(user)).thenReturn(invitationList);
+		
+		String view = staffInterviewController.viewInvitation(model, user);
+		assertEquals("view_invitation", view);
+		verify(model).addAttribute("invitationList", invitationList);
+	}
+	
+	
+}

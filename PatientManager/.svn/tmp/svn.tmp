@@ -1,0 +1,27 @@
+package com.fdmgroup.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+
+public class Appointment implements IStorable{
+
+	@Id
+	@Column(name= "appointment_id")
+	private long id;
+	
+	private long patient_id;
+	
+	private long practitioner_id;
+	
+	private AppointmentStatus status;
+	
+	private AppointmentType type;
+	
+	
+	
+	
+	
+	
+	
+	
+}

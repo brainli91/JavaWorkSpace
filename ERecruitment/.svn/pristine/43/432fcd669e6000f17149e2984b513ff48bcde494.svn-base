@@ -1,0 +1,314 @@
+package com.fdmgroup.controller;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fdmgroup.dao.ApplicantProfileDAO;
+import com.fdmgroup.dao.EducationDAO;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.dao.WorkHistoryDAO;
+import com.fdmgroup.model.ApplicantProfile;
+import com.fdmgroup.model.Education;
+import com.fdmgroup.model.FileEntity;
+import com.fdmgroup.model.User;
+import com.fdmgroup.model.WorkHistory;
+
+@Controller
+@SessionAttributes(names = { "user", "applicantProfile" }, types = { User.class, ApplicantProfile.class })
+public class ProfileController {
+
+	@Autowired
+	@Qualifier("applicantProfileDAO")
+	ApplicantProfileDAO applicantDAO;
+
+	@Autowired
+	@Qualifier("workHistoryDAO")
+	WorkHistoryDAO workHistoryDAO;
+
+	@Autowired
+	@Qualifier("educationDAO")
+	EducationDAO educationDAO;
+
+	@Autowired
+	UserDAO userDAO;
+
+  @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+  public String showProfileForm(Model model, @ModelAttribute User user) {
+    ApplicantProfile profile = applicantDAO.findProfileByEmail(user.getEmail());
+    if (profile == null) {
+      profile = new ApplicantProfile();
+    }
+    model.addAttribute("applicantProfile", profile);
+
+		// Need to go through applicant DAO as it needs to parse the strings
+		model.addAttribute("interests", applicantDAO.getInterestList(profile.getId()));
+		model.addAttribute("skills", applicantDAO.getSkillsList(profile.getId()));
+		return "profile_form";
+	}
+
+  @RequestMapping(value = "/editProfile", method = RequestMethod.POST)
+  public String editProfile(Model model, @ModelAttribute User user, @Valid ApplicantProfile profile, BindingResult br) {
+    if (br.hasErrors()) {
+      model.addAttribute("errorMessage", "Could not update profile");
+      return viewApplicantProfile(model, user);
+    }
+    profile.setUser(user);
+	ApplicantProfile applicantProfile = user.getApplicantProfile();
+
+	applicantProfile.setAddress(profile.getAddress());
+	applicantProfile.setPrimaryPhone(profile.getPrimaryPhone());
+	applicantProfile.setSecondaryPhone(profile.getSecondaryPhone());
+
+    applicantDAO.update(applicantProfile);
+    model.addAttribute("successMessage", "Profile updated");
+    return viewApplicantProfile(model, user);
+  }
+
+
+	@RequestMapping(value = "/viewMyProfile", method = RequestMethod.GET)
+	public String viewApplicantProfile(Model model, @ModelAttribute User user) {
+		User applicant = userDAO.read(user.getId());
+		FileEntity file = applicant.getApplicantProfile().getResume();
+		model.addAttribute("applicant", applicant);
+		return "view_applicant";
+	}
+
+	@RequestMapping(value = "/viewProfile", method = RequestMethod.GET)
+	public String viewApplicantProfile(Model model, @RequestParam String profileID) {
+		int id = 0;
+		ApplicantProfile profile = null;
+		try {
+			id = Integer.parseInt(profileID);
+			profile = applicantDAO.read(id);
+		} catch (NumberFormatException e) {
+			model.addAttribute("applicantProfile", new ApplicantProfile());
+		}
+		model.addAttribute("applicantProfile", profile);
+		return "view_profile";
+	}
+
+	@RequestMapping(value = "/createEducation", method = RequestMethod.POST)
+	public @ResponseBody long createEducation(Model model, @ModelAttribute User user,
+			@RequestParam("institution") String institution, @RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate, @RequestParam("degree") String degree,
+			@RequestParam("program") String program) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		SimpleDateFormat sqlParser = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlStartDate = null;
+		java.sql.Date sqlEndDate = null;
+
+		try {
+			sqlStartDate = new java.sql.Date(sqlParser.parse(startDate).getTime());
+			sqlEndDate = new java.sql.Date(sqlParser.parse(endDate).getTime());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		Education e = new Education();
+		e.setInstitution(institution);
+		e.setStartDate(sqlStartDate);
+		e.setEndDate(sqlEndDate);
+		e.setDegree(degree);
+		e.setProgram(program);
+		e.setApplicantProfile(applicantProfile);
+		Education edu = educationDAO.create(e);
+
+		applicantProfile.getEducation().add(edu);
+		return e.getId();
+	}
+
+	@RequestMapping(value = "/createWorkHistory", method = RequestMethod.POST)
+	public @ResponseBody long createWorkHistory(Model model, @ModelAttribute User user,
+			@RequestParam("employer") String employer, @RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate, @RequestParam("title") String title,
+			@RequestParam("description") String description) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		SimpleDateFormat sqlParser = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlStartDate = null;
+		java.sql.Date sqlEndDate = null;
+
+		try {
+			sqlStartDate = new java.sql.Date(sqlParser.parse(startDate).getTime());
+			sqlEndDate = new java.sql.Date(sqlParser.parse(endDate).getTime());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		WorkHistory wh = new WorkHistory();
+		wh.setEmployer(employer);
+		wh.setStartDate(sqlStartDate);
+		wh.setEndDate(sqlEndDate);
+		wh.setTitle(title);
+		wh.setDescription(description);
+		wh.setApplicantProfile(applicantProfile);
+		workHistoryDAO.create(wh);
+
+		applicantProfile.getWorkHistory().add(wh);
+		return wh.getId();
+	}
+
+	@RequestMapping(value = "/editWorkHistory", method = RequestMethod.POST)
+	public @ResponseBody String editWorkHistory(Model model, @ModelAttribute User user,
+			@RequestParam("workId") long workId, @RequestParam("employer") String employer,
+			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+			@RequestParam("title") String title, @RequestParam("description") String description) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		SimpleDateFormat sqlParser = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlStartDate = null;
+		java.sql.Date sqlEndDate = null;
+
+		try {
+			sqlStartDate = new java.sql.Date(sqlParser.parse(startDate).getTime());
+			sqlEndDate = new java.sql.Date(sqlParser.parse(endDate).getTime());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		WorkHistory wh = workHistoryDAO.read(workId);
+		wh.setEmployer(employer);
+		wh.setStartDate(sqlStartDate);
+		wh.setEndDate(sqlEndDate);
+		wh.setTitle(title);
+		wh.setDescription(description);
+		wh.setApplicantProfile(applicantProfile);
+
+		applicantProfile.getWorkHistory().add(wh);
+		workHistoryDAO.update(wh);
+		return "";
+	}
+
+	@RequestMapping(value = "/editEducation", method = RequestMethod.POST)
+	public @ResponseBody String editEducation(Model model, @ModelAttribute User user,
+			@RequestParam("educationId") long educationId, @RequestParam("institution") String institution,
+			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+			@RequestParam("degree") String degree, @RequestParam("program") String program) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		SimpleDateFormat sqlParser = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date sqlStartDate = null;
+		java.sql.Date sqlEndDate = null;
+
+		try {
+			sqlStartDate = new java.sql.Date(sqlParser.parse(startDate).getTime());
+			sqlEndDate = new java.sql.Date(sqlParser.parse(endDate).getTime());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		Education e = educationDAO.read(educationId);
+		e.setInstitution(institution);
+		e.setStartDate(sqlStartDate);
+		e.setEndDate(sqlEndDate);
+		e.setDegree(degree);
+		e.setProgram(program);
+		e.setApplicantProfile(applicantProfile);
+
+		applicantProfile.getEducation().add(e);
+		educationDAO.update(e);
+		return "";
+	}
+
+
+	@RequestMapping(value = "/createSkill", method = RequestMethod.POST)
+	public @ResponseBody String createSkill(Model model, @ModelAttribute User user,
+			@RequestParam("skill") String newSkill) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+
+		if (applicantProfile.getSkills() == null) {
+			applicantProfile.setSkills(newSkill);
+		} else {
+			String previousSkills = applicantProfile.getSkills();
+			applicantProfile.setSkills(previousSkills + "|" + newSkill);
+		}
+
+		applicantDAO.update(applicantProfile);
+
+		return "";
+	}
+
+	@RequestMapping(value = "/removeSkill", method = RequestMethod.POST)
+	public @ResponseBody String removeSkill(Model model, @ModelAttribute User user,
+			@RequestParam("toRemove") String skillToRemove) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		String previousSkills = "";
+		previousSkills = applicantProfile.getSkills();
+		String modifiedSkills = "";
+
+		// Removes the specific instance of a skill to remove, need to remove
+		// for two test
+		// cases if it is the last instance, or within the set
+		if (previousSkills.contains(skillToRemove + "|")) {
+			modifiedSkills = previousSkills.replaceFirst((skillToRemove + "\\|"), "");
+		} else {
+			if (previousSkills.contains("|" + skillToRemove)) {
+				modifiedSkills = previousSkills.replaceFirst(("\\|" + skillToRemove), "");
+			} else {
+				modifiedSkills = previousSkills.replaceFirst(skillToRemove, "");
+			}
+		}
+
+		applicantProfile.setSkills(modifiedSkills);
+
+		applicantDAO.update(applicantProfile);
+
+		return "";
+	}
+
+
+	@RequestMapping(value = "/createInterest", method = RequestMethod.POST)
+	public @ResponseBody String createInterest(Model model, @ModelAttribute User user,
+			@RequestParam("interest") String newInterest) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+
+
+		if (applicantProfile.getInterests() == null) {
+			applicantProfile.setInterests(newInterest);
+		} else {
+			String previousInterests = applicantProfile.getInterests();
+			applicantProfile.setInterests(previousInterests + "|" + newInterest);
+		}
+
+		applicantDAO.update(applicantProfile);
+
+		return "";
+	}
+
+	@RequestMapping(value = "/removeInterest", method = RequestMethod.POST)
+	public @ResponseBody String removeInterest(Model model, @ModelAttribute User user,
+			@RequestParam("toRemove") String interestToRemove) {
+		ApplicantProfile applicantProfile = applicantDAO.getProfileByUserId(user.getId());
+		String previousInterests = applicantProfile.getInterests();
+		String modifiedInterests = "";
+
+		// Removes the specific instance of a interest to remove, need to remove
+		// for two test
+		// cases if it is the last instance, or within the set
+		if (previousInterests.contains(interestToRemove + "|")) {
+			modifiedInterests = previousInterests.replaceFirst((interestToRemove + "\\|"), "");
+		} else {
+			if (previousInterests.contains("|" + interestToRemove)) {
+				modifiedInterests = previousInterests.replaceFirst(("\\|" + interestToRemove), "");
+			} else {
+				modifiedInterests = previousInterests.replaceFirst(interestToRemove, "");
+			}
+		}
+
+		applicantProfile.setInterests(modifiedInterests);
+
+		applicantDAO.update(applicantProfile);
+
+		return "";
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.fdmgroup.application;
+
+import com.fdmgroup.interfaces.*;
+
+public abstract class Application implements IStorable {
+
+	private int app_id;
+
+	public abstract IInformation getAppUser();
+
+	public int getAppID() {
+		return this.app_id;
+	}
+
+	public void setAppID(int id) {
+		this.app_id = id;
+	}
+
+}

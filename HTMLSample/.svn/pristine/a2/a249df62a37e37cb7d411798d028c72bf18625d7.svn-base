@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>My Index Page</title>
+		<link rel="stylesheet" type="text/css" href="css/MyCSS.css">
+		<link href='http://fonts.googleapis.com/css?family=Monsieur+La+Doulaise' rel='stylesheet' type='text/css' />
+		
+	</head>
+	
+	<body>
+		<h1 class="center">Hello World!</h1>
+		<a href="http://www.cnn.com" target="_blank">CNN</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="http://www.yahoo.com" target="_blank">Yahoo!</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="http://www.bing.com" target="_blank">Bing</a>
+		<br />
+		<img src="images/apple.png" alt="Apple as a fruit" title="Apple"/>
+		<br />
+		<hr />
+		<table border="1" class="center">
+			<thead>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>		
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Jun</td>
+					<td>Wang</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Yun</td>
+					<td>Lai</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Peter</td>
+					<td>Uhlenbruck</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<br />
+		<p class="center">Send Mail</p>
+
+		
+		<br />
+		<p id="googlePara">Search Google</p>
+		
+		<div class="marked">
+			<form method="get" action="https://www.google.com/search" target="_blank">
+				<fieldset>
+					<legend>Query Google</legend>
+				
+					<label>Query</label>
+					<input type="text" name="q" required="required">
+					<br />
+					<label>Email:</label>
+					<input type="email" name="email">
+					<br />
+					<input type="submit" value="Search">
+					<input type="reset" value="Reset">
+				</fieldset>
+				<p>This is a paragraph...</p>
+			</form>
+		</div>
+		<br />
+		<br />
+		<form method="post" action="mailto:brian.li@fdmgroup.com?subject='Test HTML'">
+			<label>Username:</label>
+			<input type="text" name="username" value="uname...." maxlength="20" size="30">
+			<br />
+			<label>Password:</label>
+			<input type="password" name="password">
+			<br />
+			<input type="checkbox" name="confirm" required="required">
+			<label>Are you sure?</label>
+			<br />
+			<input type="radio" name="gender">
+			<label>Male</label>
+			<input type="radio" name="gender">
+			<label>Female</label>
+			<br />
+			<label>Comments:</label>
+			<textarea rows="10" cols="30" name="comments">Hello World!!</textarea>
+			<br />
+			<input type="submit" value="Login">
+			<input type="reset" value="Cancel">
+			<input type="button" value="Normal Button">
+			<button>Kind of Button</button>
+		</form>
+		
+		<ul>
+			<li>Music</li>
+			<li>Movies</li>
+			<li>Sports</li>
+			<li>Arts</li>
+		</ul>
+		
+		<div class="col">
+			<p> ld;kgdjfl;gkdfj dflgkjd;fgiojg;esoirigodihgodfjgoijdofgijdf gdflgkjdlfkgdj lgkdfjgldkfgjdosegoirjg;aowijg;oeijg df </p>
+			<p> ld;kgdjfl;gkdfj dflgkjd;fgiojg;esoirigodihgodfjgoijdofgijdf gdflgkjdlfkgdj lgkdfjgldkfgjdosegoirjg;aowijg;oeijg df </p>
+			<p> ld;kgdjfl;gkdfj dflgkjd;fgiojg;esoirigodihgodfjgoijdofgijdf gdflgkjdlfkgdj lgkdfjgldkfgjdosegoirjg;aowijg;oeijg df </p>
+			<p> ld;kgdjfl;gkdfj dflgkjd;fgiojg;esoirigodihgodfjgoijdofgijdf gdflgkjdlfkgdj lgkdfjgldkfgjdosegoirjg;aowijg;oeijg df </p>
+			<p> ld;kgdjfl;gkdfj dflgkjd;fgiojg;esoirigodihgodfjgoijdofgijdf gdflgkjdlfkgdj lgkdfjgldkfgjdosegoirjg;aowijg;oeijg df </p>
+		</div>
+	</body>
+</html>

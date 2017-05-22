@@ -1,0 +1,65 @@
+package com.fdmgroup.entity;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name= "PM_USERS")
+/*@NamedQueries({@NamedQuery=})*/
+public class User implements IStorable{
+
+	@Id
+	@Column(name="user_id", nullable=false)
+	@SequenceGenerator(name= "pm_user_sequence", sequenceName="PM_USERS_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pm_user_sequence")
+	private long id;
+	
+	@Column(name="email", nullable=false, length=64)
+	private String email;
+	
+	@Column(name="pw",nullable=false)
+	private String password;
+	
+	@Column(name="first_name",nullable=false,length=32)
+	private String firstName;
+	
+	@Column(name="last_name",nullable=false,length=32)
+	private String lastName;
+	
+	@Column(name="active",nullable=false)
+	private int active;
+	
+	@Transient
+	private String fullName;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	private Role role;
+	
+/*	@OneToOne(mappedBy= "user")
+	private Profile profile;
+	
+	@OneToMany(mappedBy= "")
+	private Set<Treatment> Treatments;
+	*/
+	
+	
+	
+	
+	
+}
+

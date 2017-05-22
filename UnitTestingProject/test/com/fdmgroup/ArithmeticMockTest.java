@@ -1,0 +1,111 @@
+package com.fdmgroup;
+
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+
+import java.util.Iterator;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) //For ordering the methods
+public class ArithmeticMockTest {
+	
+	@Mock
+	Arithmetic mockedArithmetic;
+	
+	@Spy
+	Arithmetic spyArithmetic;
+	
+	@Mock
+	Iterator<String> mockedIterator ;
+	@Before
+	public void setUp(){
+		//mockedArithmetic = mock(Arithmetic.class);
+		//spyArithmetic =spy(Arithmetic.class);
+		MockitoAnnotations.initMocks(this);
+		
+//		mockedArithmetic = mock(Arithmetic.class); //Making it mock
+		when(mockedArithmetic.add(10, 5)).thenReturn(100); // Stubbing, when is mockito method
+		when(mockedArithmetic.add(25, 35)).thenReturn(60);
+		when(mockedArithmetic.mul(25, 8)).thenReturn(200);
+		when(mockedArithmetic.div(45, 9)).thenReturn(5);
+		when(mockedArithmetic.div(anyInt(), eq(0))).thenThrow(ArithmeticException.class);
+		when(mockedIterator.next()).thenReturn("Hello").thenReturn("World").thenReturn("!!!");  //This way to recursively call method
+		
+		when(spyArithmetic.add(10, 5)).thenReturn(100); // Stubbing, when is mockito method
+		when(spyArithmetic.add(25, 35)).thenReturn(60);
+		when(spyArithmetic.mul(25, 8)).thenReturn(200);
+		when(spyArithmetic.div(45, 9)).thenReturn(5);
+		when(spyArithmetic.div(anyInt(), eq(0))).thenThrow(ArithmeticException.class);
+	}	
+	
+	@Test/*(expected = ArithmeticException.class) //We are expecting an exception because 24/0 is not giving us a value
+*/	
+	public void testAdd(){
+	   assertEquals(100, mockedArithmetic.add(10,5));	
+//	   assertEquals(0, mockedArithmetic.div(24,0));
+	 //if it is not called in the @before .then it will go through the real method
+	   assertEquals(69, spyArithmetic.add(22, 47));
+	}
+	
+	
+	@Test
+
+	public void testNumberOfTimes(){
+		   assertEquals(100, mockedArithmetic.add(10,5));	
+		   assertEquals(0, mockedArithmetic.div(25,8));
+		   assertEquals(5, mockedArithmetic.div(45, 9));
+		   assertEquals(100, mockedArithmetic.add(10,5));
+		   assertEquals(100, mockedArithmetic.add(10,5)); 
+		   assertEquals(200, mockedArithmetic.mul(25,8)); 
+		   assertEquals(100, mockedArithmetic.add(10,5));
+		//SINCE THE PRIMATIVES ARE SETTED TO BE 0 OR NULL VALUE WHEN IT IS NOT INTIALIZED IN THE BEOFRE @ 
+		//In this case add(78,22) will be considered as add(0,0) in mockito
+		// assertEquals(100, mockedArithmetic.add(10,5));
+		//In this test,  mockedArithmetic.add has been verified with 4 time runtime
+		//verify(mockedArithmetic,times(4)).add(10,5);
+		   //verify(mockedArithmetic,atMost(2)).add(10,5);
+		//verify(mockedArithmetic,atLeast(2)).add(10,5);
+		   verify(mockedArithmetic, never()).add(2,5); //Check add method and check it repeated it 4 times
+		   //assertEquals(100, mockedArithmetic.add(78,22)); //It sets 0,0 because we never defined 78,22. Because primitive values are set to 0
+		   assertEquals(0, mockedArithmetic.add(78,22)); //It sets 0,0 because we never defined 78,22. Because primitive values are set to 0
+	}
+	
+	@Test
+
+	public void testOrder(){
+		assertEquals(100, mockedArithmetic.add(10,5));	
+		assertEquals(0, mockedArithmetic.div(25,8));
+		assertEquals(5, mockedArithmetic.div(45, 9));
+		assertEquals(100, mockedArithmetic.add(10,5));
+		
+		assertEquals(200, mockedArithmetic.mul(25,8)); 
+		assertEquals(100, mockedArithmetic.add(10,5));
+		
+		assertEquals(0, mockedArithmetic.add(78,22));
+		InOrder io = inOrder(mockedArithmetic);
+		io.verify(mockedArithmetic).add(10,5);	
+		io.verify(mockedArithmetic).div(25,8);
+		io.verify(mockedArithmetic).div(45, 9);
+		io.verify(mockedArithmetic).add(10,5);
+		io.verify(mockedArithmetic).mul(25,8); 
+		io.verify(mockedArithmetic).add(10,5);
+		io.verify(mockedArithmetic).add(78,22);
+     
+	}
+	
+	@Test
+	public void testIteration(){
+		assertEquals("Hello World!!!", mockedIterator.next() + " " + mockedIterator.next() + mockedIterator.next());
+	}
+
+}

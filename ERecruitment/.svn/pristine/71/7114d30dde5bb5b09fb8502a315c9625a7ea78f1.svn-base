@@ -1,0 +1,269 @@
+package com.fdmgroup.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fdmgroup.dao.ApplicantProfileDAO;
+import com.fdmgroup.dao.InterviewDAO;
+import com.fdmgroup.dao.JobApplicationDAO;
+import com.fdmgroup.dao.JobDAO;
+import com.fdmgroup.dao.RoleDAO;
+import com.fdmgroup.dao.StaffInterviewDAO;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.model.Interview;
+import com.fdmgroup.model.InterviewResult;
+import com.fdmgroup.model.Job;
+import com.fdmgroup.model.JobApplication;
+import com.fdmgroup.model.Role;
+import com.fdmgroup.model.StaffInterview;
+import com.fdmgroup.model.User;
+
+@Controller
+@SessionAttributes(names = { "user" }, types = { User.class })
+public class RecruiterController {
+
+  @Autowired
+  /*@Qualifier("jobDAO")*/
+  JobDAO jobDAO;
+
+  @Autowired
+  ApplicantProfileDAO applicantProfileDAO;
+
+  @Autowired
+  UserDAO userDAO;
+
+  @Autowired
+  RoleDAO roleDAO;
+
+  @Autowired
+  InterviewDAO interviewDAO;
+
+  @Autowired
+  JobApplicationDAO jobAppDAO;
+
+  @Autowired
+  StaffInterviewDAO staffInterviewDAO;
+
+  @RequestMapping(value = "/recruiterView", method = RequestMethod.GET)
+  public String displayRecruiterDashboard(Model model, @ModelAttribute User user) {
+    Set<Job> recruiterJobs = user.getCreatedJobs();
+    model.addAttribute("recruiterJobs", recruiterJobs);
+    return "recruiter_dashboard";
+  }
+
+  @RequestMapping(value = "/createOrEditJobView", method = RequestMethod.GET)
+  public String createOrEditJob(Model model, @ModelAttribute User user, @RequestParam("jobId") String jobId) {
+    Job job = null;
+
+    if (jobId == null || jobId.equals("") || jobId.equals("0")) {
+      job = new Job();
+      job.setJobPoster(user);
+    } else {
+      long id = Long.parseLong(jobId);
+      job = jobDAO.read(id);
+
+      if (job == null) {
+        model.addAttribute("errorMsg", "Job does not exist.");
+        return "view_all_jobs";
+      }
+    }
+
+    model.addAttribute("job", job);
+    return "create_job";
+  }
+
+  @RequestMapping(value = "/postJob", method = RequestMethod.POST)
+  public String postJob(Model model, @ModelAttribute User user, @Valid Job job, BindingResult br,
+      @RequestParam("jobId") String jobId) {
+    if (br.hasErrors()) {
+      return "recruiter_dashboard";
+    } else {
+      Job createdJob = null;
+      job.setJobPoster(user);
+      if (jobId == null || jobId.isEmpty() || jobId.equals("0")) {
+        createdJob = jobDAO.create(job);
+        user.getCreatedJobs().add(createdJob);
+      } else {
+        job.setId(Long.parseLong(jobId));
+        createdJob = jobDAO.update(job);
+      }
+
+      if (createdJob != null) {
+        model.addAttribute("createdJob", createdJob);
+        model.addAttribute("successMessage", "Job Created!");
+        return "redirect:dashboard";
+      } else {
+        model.addAttribute("errorMessage", "Job creation failed");
+        model.addAttribute("job", job);
+        return "create_job";
+      }
+    }
+  }
+
+  @RequestMapping(value = "/recruiterViewJob", method = RequestMethod.GET)
+  public String recruiterViewJob(Model model, @RequestParam("jobId") String jobId) {
+    long id = Long.parseLong(jobId);
+    Job job = jobDAO.read(id);
+    model.addAttribute("job", job);
+    return "view_job";
+  }
+
+  @RequestMapping(value = "/viewApplicantProfile", method = RequestMethod.GET)
+  public String viewJobApplicantProfile(Model model, @RequestParam("applicant") String applicant) {
+    long id = Long.parseLong(applicant);
+    User userApplicant = userDAO.read(id);
+
+    if (userApplicant != null) {
+      model.addAttribute("applicant", userApplicant);
+      return "view_applicant";
+    } else {
+      model.addAttribute("errorMsg", "Error: User does not exist.");
+      return "error_page";
+    }
+
+  }
+
+  @RequestMapping(value = "/recruiterViewInterviews", method = RequestMethod.GET)
+  public String viewRecruiterInterviews(Model model, @ModelAttribute User user) {
+    List<StaffInterview> interviewList = staffInterviewDAO.viewStaffInterviewByUser(user);
+    if (interviewList.size() == 0 || interviewList == null) {
+      model.addAttribute("msg", "Nothing to display");
+    } else {
+      model.addAttribute("interviews", interviewList);
+    }
+    return "view_all_interviews";
+  }
+
+  @RequestMapping(value = "/jobApplicationViewInterviews", method = RequestMethod.GET)
+  public String viewJobApplicationInterviews(Model model, @RequestParam("application") String application) {
+    long id = Long.parseLong(application);
+    JobApplication jobApp = jobAppDAO.read(id);
+    if (jobApp == null) {
+      model.addAttribute("errorMsg", "Application does not exist.");
+      return "view_interviews";
+    } else {
+      Set<Interview> interviews = jobApp.getInterviews();
+      model.addAttribute("jobApplication", jobApp);
+      model.addAttribute("jobInterviews", interviews);
+
+      return "view_interviews";
+    }
+  }
+
+  @RequestMapping(value = "/viewStatistics", method = RequestMethod.GET)
+  public String loadRecruiterStatistics(Model model, @ModelAttribute User user) {
+    HashMap<String, Integer> postJobCount = new HashMap<>();
+
+    Role role = roleDAO.findByName("recruiter");
+    
+    for (User recruiter : role.getUsers()) {
+	      int sum = 0;
+	      for (Job job : jobDAO.findByPoster(recruiter)) {
+	        sum += job.getNumOfPositions();
+	      }
+	      postJobCount.put(recruiter.getEmail(), sum);
+	}
+
+    model.addAttribute("postJobCount", postJobCount);
+
+    return "view_statistics";
+  }
+  
+  
+  
+
+  @RequestMapping(value = "/addOrEditInterview", method = RequestMethod.GET)
+  public String addOrEditInterview(Model model, @RequestParam("interviewId") String interviewId) {
+    Interview interview = null;
+    List<User> staffs = new ArrayList<>();
+
+    if (interviewId == null || interviewId.equals("")) {
+      interview = new Interview();
+    } else {
+      long id = Long.parseLong(interviewId);
+      interview = interviewDAO.read(id);
+
+      if (interview == null) {
+        model.addAttribute("errorMsg", "Interview does not exist.");
+        return "view_interviews";
+      }
+    }
+    model.addAttribute("interview", interview);
+
+    List<User> allUsers = userDAO.findAll();
+    for (User user : allUsers) {
+      if (user.getRole().getName().equals("staff"))
+        staffs.add(user);
+    }
+    model.addAttribute("staffs", staffs);
+
+    return "create_interview";
+  }
+
+  @RequestMapping(value = "/addOrEditInterview", method = RequestMethod.POST)
+  public String addOrEditInterview(Model model, Interview interview,
+      @RequestParam("staffInvitees") String[] staffInvitees) {
+    Set<StaffInterview> staffInterviews = new HashSet<>();
+    Interview iview = null;
+
+    interview.setResult(InterviewResult.PENDING);
+    if (staffInvitees != null) {
+      for (String si : staffInvitees) {
+        User staff = userDAO.findByEmail(si);
+        if (staff != null) {
+          StaffInterview staffInt = new StaffInterview(staff, interview);
+          staffInterviews.add(staffInt);
+        }
+      }
+    }
+    Set<StaffInterview> invitations = interview.getInvitations();
+    invitations.addAll(staffInterviews);
+    interview.setInvitations(invitations);
+
+    if (interview.getId() == 0)
+      iview = interviewDAO.create(interview);
+    else
+      iview = interviewDAO.update(interview);
+
+    if (iview != null)
+      model.addAttribute("successMsg", "Interview successfully scheduled");
+    else {
+      model.addAttribute("errorMsg", "Interview cannot be scheduled");
+      return "create_interview";
+    }
+
+    model.addAttribute("newInterview", interview);
+    return "view_interviews";
+  }
+
+  @RequestMapping(value = "/viewAllRecruiterJobs", method = RequestMethod.GET)
+  public String viewAllRecruiterJobs(Model model, @ModelAttribute User user) {
+    Set<Job> recruiterJobs = user.getCreatedJobs();
+    model.addAttribute("recruiterJobs", recruiterJobs);
+    return "view_all_jobs";
+  }
+
+  @RequestMapping(value = "/viewAllJobs", method = RequestMethod.GET)
+  public String viewAllJobs(Model model, @ModelAttribute User user) {
+    List<Job> allJobs = jobDAO.findAll();
+    model.addAttribute("jobs", allJobs);
+    return "view_all_jobs_recruiter";
+  }
+
+  
+}

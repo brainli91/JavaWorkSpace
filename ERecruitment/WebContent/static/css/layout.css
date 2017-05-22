@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+.navbar {
+	margin-bottom: 0;
+	background-color: #000000;
+	z-index: 10;
+	border: 0;
+	font-size: 13px !important;
+	line-height: 1.42857143 !important;
+	letter-spacing: 4px;
+	border-radius: 0;
+}
+
+#content.span11{
+	margin-left: 0;
+}
+
+.btn {
+	margin-left: 1500px;
+}
+
+.navbar-brand {
+	font-size: 20px !important;
+	font-style: inherit;
+	margin-left: 0;
+}
+
+
+
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+	color: #fff !important;
+}
+
+.btn {
+	margin-left: 15px;
+}
+
+
+
+
+
+body {
+	padding: 50px;
+}
+
+

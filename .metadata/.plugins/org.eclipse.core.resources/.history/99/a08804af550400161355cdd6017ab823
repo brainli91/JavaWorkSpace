@@ -1,0 +1,224 @@
+package com.fdmgroup.application;
+
+import java.util.*;
+import java.util.logging.Logger;
+
+import org.apache.log4j.PropertyConfigurator;
+
+import com.fdmgroup.platform.*;
+import com.fdmgroup.exception.*;
+import com.fdmgroup.istorables.*;
+import com.fdmgroup.appuserinfo.*;
+import com.fdmgroup.enumeration.*;
+
+public class ShareholderApp extends Application {
+
+	private Controller_Shareholder cs;
+	private Shareholder shareholder;
+	private double portfolioCash;
+	static Logger userActivityLog = Logger
+			.getLogger("LoggingUserActivity.class");
+
+	/* CONSTRUCTOR */
+
+	public ShareholderApp(Shareholder shareholder) {
+		cs = Controller_Shareholder.getInstance();
+
+		this.shareholder = shareholder;
+		this.portfolioCash = 0.0;
+
+		PropertyConfigurator.configure("useractivityconfig.properties");
+	}
+
+	/* MAIN ShareholderApp METHODS */
+
+	public void viewAvailableStocks() {
+		// IMPLEMENT: Get list of stocks for sale in the "order book" and
+		// display it for shareholder to see
+
+		userActivityLog.info(this.shareholder.getShareholderUsername()
+				+ "(shareholder) -- Viewed available stocks");
+	}
+
+	public void viewBrokersList() {
+		try {
+			List<Broker> partners = cs
+					.listCurrentBrokerPartners(this.shareholder
+							.getShareholderID()); // DISPLAY
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Viewed list of broker partners");
+		} catch (BrokerPartnersException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewAvailableBrokers() {
+		try {
+			List<Broker> availableBrokers = cs.listAvailableBrokers(); // DISPLAY
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Viewed list of available brokers");
+		} catch (AvailableBrokersNotFoundException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewPortfolio() {
+		try {
+			List<OwnedStock> portfolioShares = cs
+					.listOwnedStocks(this.shareholder.getShareholderID()); // DISPLAY
+																			// with
+																			// cash
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Viewed portfolio");
+		} catch (OwnedStocksNotFoundException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void requestBroker(int idToRequest) {
+		// viewAvailableBrokers() first
+		ClientRequest cr = new ClientRequest(
+				this.shareholder.getShareholderID(),
+				this.shareholder.getShareholderName(), idToRequest);
+		try {
+			cs.addClientRequest(cr);
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Requested clientship of a broker");
+		} catch (InvalidClientRequestException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		}
+	}
+
+	public void removeBroker(int idToRemove) {
+		// IMPLEMENT
+
+		userActivityLog.info(this.shareholder.getShareholderUsername()
+				+ "(shareholder) -- Removed a broker as a partner");
+	}
+
+	public void addFundsToPortfolio(double cashAmount) {
+		this.portfolioCash += cashAmount;
+
+		userActivityLog.info(this.shareholder.getShareholderUsername()
+				+ "(shareholder) -- Added funds to portfolio");
+	}
+
+	public void removeFundsFromPortfolio(double cashAmount) {
+		this.portfolioCash -= cashAmount;
+
+		userActivityLog.info(this.shareholder.getShareholderUsername()
+				+ "(shareholder) -- Removed funds from portfolio");
+	}
+
+	public void requestBuyTrade() {
+		// viewBrokersList() first
+		// viewAvailableStocks() second
+		int brokerID = 0; // SIMULATED; Change to shareholder's choice
+		Stock stock = null; // SIMULATED; Change to shareholder's choice
+		int quantity = 0; // SIMULATED; Change to shareholder's choice
+		TradeRequest tr = new TradeRequest(TradeType.BUY,
+				this.shareholder.getShareholderID(),
+				this.shareholder.getShareholderName(), brokerID, stock,
+				quantity);
+		try {
+			cs.addTradeRequest(tr);
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Requested a buy trade to a broker");
+		} catch (InvalidTradeRequestException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		}
+	}
+
+	public void requestSellTrade() {
+		// viewBrokersList() first
+		// IMPLEMENT: Load list of stocks from portfolio
+		int brokerID = 0; // SIMULATED; Change to shareholder's choice
+		Stock stock = null; // SIMULATED; Change to shareholder's choice
+		int quantity = 0; // SIMULATED; Change to shareholder's choice
+		TradeRequest tr = new TradeRequest(TradeType.SELL,
+				this.shareholder.getShareholderID(),
+				this.shareholder.getShareholderName(), brokerID, stock,
+				quantity);
+		try {
+			cs.addTradeRequest(tr);
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Requested a sell trade to a broker");
+		} catch (InvalidTradeRequestException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		}
+	}
+
+	public void cancelOrderedTrade() {
+
+	}
+
+	public void viewCompletedTrades() {
+		try {
+			List<TradeRequest> trades = cs
+					.listShareholderCompletedTrades(this.shareholder); // DISPLAY
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Viewed completed trades");
+		} catch (CompletedTradesNotFoundException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewCurrentTrades() {
+		try {
+			List<TradeRequest> trades = cs
+					.listShareholderCurrentTrades(this.shareholder); // DISPLAY
+
+			userActivityLog.info(this.shareholder.getShareholderUsername()
+					+ "(shareholder) -- Viewed current trades");
+		} catch (CurrentTradesNotFoundException e) {
+			userActivityLog.info(this.shareholder.getShareholderName()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	/* GETTERS and SETTERS */
+
+	@Override
+	public Shareholder getAppUser() {
+		return this.shareholder;
+	}
+
+	public double getPortfolioCash() {
+		return this.portfolioCash;
+	}
+
+	public void setPortfolioCash(double d) {
+		this.portfolioCash = d;
+	}
+
+}

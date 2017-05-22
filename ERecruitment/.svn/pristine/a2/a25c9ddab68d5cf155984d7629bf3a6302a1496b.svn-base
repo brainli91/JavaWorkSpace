@@ -1,0 +1,254 @@
+package com.fdmgroup.controller;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fdmgroup.auth.PasswordHash;
+import com.fdmgroup.dao.ApplicantProfileDAO;
+import com.fdmgroup.dao.RoleDAO;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.model.ApplicantProfile;
+import com.fdmgroup.model.Role;
+import com.fdmgroup.model.User;
+
+@Controller
+public class AdminController {
+
+  @Autowired
+  @Qualifier("userDAO")
+  UserDAO userDAO;
+
+  @Autowired
+  @Qualifier("roleDAO")
+  RoleDAO roleDAO;
+
+  @Autowired
+  @Qualifier("applicantProfileDAO")
+  ApplicantProfileDAO applicantProfileDAO;
+
+  @Autowired
+  @Qualifier("password")
+  PasswordHash passwordHash;
+
+  @RequestMapping(value = "/adminDashboard", method = RequestMethod.GET)
+  public String viewAdminDashboard(Model model, User user) {
+    BufferedReader br = null;
+
+    try {
+      List<String> allSysLogs = new ArrayList<>();
+      br = new BufferedReader(new FileReader(new File("C:/apache-tomcat-8.0.26/logs/system.log")));
+      while (br.readLine() != null) {
+        allSysLogs.add(br.readLine());
+      }
+      br.close();
+      Collections.reverse(allSysLogs);
+      List<String> syslog = allSysLogs.subList(0, 5);
+      model.addAttribute("syslog", syslog);
+
+      List<String> allUserLogs = new ArrayList<>();
+      br = new BufferedReader(new FileReader(new File("C:/apache-tomcat-8.0.26/logs/user.log")));
+      while (br.readLine() != null) {
+        allUserLogs.add(br.readLine());
+      }
+      br.close();
+      Collections.reverse(allUserLogs);
+      List<String> userlog = allUserLogs.subList(0, 5);
+      model.addAttribute("userlog", userlog);
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return "admin_dashboard";
+  }
+
+  @RequestMapping(value = "/viewUsers", method = RequestMethod.GET)
+  public String viewAllUsers(Model model, User user) {
+    List<User> users = userDAO.findAll();
+    System.out.println("showing all the users:" + users);
+    model.addAttribute("users", users);
+    return "view_users";
+  }
+
+  @RequestMapping(value = "/viewBlockedUsers", method = RequestMethod.GET)
+  public String viewBlockedUsers(Model model, User user) {
+    List<User> blockedUsers = userDAO.findBlocked();
+    System.out.println("showing all the blocked users:" + blockedUsers);
+    model.addAttribute("blockedUsers", blockedUsers);
+    return "view_blockedUser";
+  }
+
+  @RequestMapping(value = "/viewActiveUsers", method = RequestMethod.GET)
+  public String viewActiveUsers(Model model, User user) {
+    List<User> activeUsers = userDAO.findActive();
+    System.out.println("showing all the active users:" + activeUsers);
+    model.addAttribute("activeUsers", activeUsers);
+    return "view_activeUser";
+  }
+
+  @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+  public String showCreateUserForm(Model model) {
+    User newUser = new User();
+    model.addAttribute("newUser", newUser);
+    return "create_user";
+  }
+
+  @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+  public String createUser(Model model, @ModelAttribute User user, @ModelAttribute User newUser, BindingResult br,
+      @RequestParam String roleName) {
+    newUser = new User();
+
+    if (br.hasErrors()) {
+      return "create_user";
+    }
+
+    if (userDAO.findByEmail(newUser.getEmail()) != null) {
+      model.addAttribute("errorMsg", "Username already exists.");
+      return "create_user";
+    } else if (roleName.equals("applicant")) {
+      ApplicantProfile ap = new ApplicantProfile();
+      Role applicantRole = roleDAO.findByName("applicant");
+      if (applicantRole == null) {
+        applicantRole = new Role();
+
+        applicantRole.setName("applicant");
+        roleDAO.create(applicantRole);
+      }
+      ap.setUser(newUser);
+      applicantProfileDAO.create(ap);
+      newUser.setApplicantProfile(ap);
+      newUser.setRole(applicantRole);
+    } else {
+      Role role = roleDAO.findByName(roleName);
+      if (role == null) {
+        role = new Role();
+        role.setName(roleName);
+        roleDAO.create(role);
+      }
+      newUser.setRole(role);
+    }
+    newUser.setPassword(passwordHash.hash(newUser.getPassword()));
+    newUser.setActive(1);
+    newUser.setBlocked(0);
+
+    userDAO.create(user);
+    return "admin_dashboard";
+
+  }
+
+  @RequestMapping(value = "/removeUser", method = RequestMethod.GET)
+  public String removeUser(Model model, @RequestParam long id) {
+    User removeUser = userDAO.read(id);
+    userDAO.delete(removeUser);
+    return "view_users";
+  }
+
+  /*
+   * @RequestMapping(value="/editUser",method=RequestMethod.GET) public String
+   * showEditUser(Model model){ User editUser = new User();
+   * model.addAttribute("editUser", editUser); return "edit_user"; }
+   */
+
+  // FIX****
+  @RequestMapping(value = "/editUser", method = RequestMethod.GET)
+  public String editUser(Model model, @ModelAttribute User user, @RequestParam long id) {
+    User editUser = userDAO.read(id);
+    System.out.println(editUser);
+    model.addAttribute("editUser", editUser);
+    return "edit_user";
+  }
+
+  @RequestMapping(value = "/editUser", method = RequestMethod.POST)
+  public String processEditUser(Model model, @ModelAttribute User editUser, @RequestParam String password) {
+    if(password != editUser.getPassword()){
+	editUser.setPassword(passwordHash.hash(password));
+    }
+	userDAO.update(editUser);
+    System.out.println("<--------------->");
+    System.out.println(editUser);
+    return "admin_dashboard";
+
+  }
+
+  @RequestMapping(value = "/blockUser", method = RequestMethod.GET)
+  public String blockUser(Model model, @RequestParam long id) {
+    User blockUser = userDAO.read(id);
+    blockUser.setBlocked(1);
+    userDAO.update(blockUser);
+    return "admin_dashboard";
+  }
+
+  @RequestMapping(value = "/systemLog", method = RequestMethod.GET)
+  public String showSystemLog(Model model) {
+    BufferedReader br = null;
+
+    try {
+      List<String> lines = new ArrayList<>();
+      br = new BufferedReader(new FileReader(new File("C:/apache-tomcat-8.0.26/logs/system.log")));
+      while (br.readLine() != null) {
+
+        lines.add(br.readLine());
+      }
+
+      br.close();
+      Collections.reverse(lines);
+
+      model.addAttribute("syslog", lines);
+
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return "system_log";
+  }
+
+  @RequestMapping(value = "/userLog", method = RequestMethod.GET)
+  public String showUserLog(Model model) {
+    BufferedReader br = null;
+
+    try {
+      List<String> lines = new ArrayList<>();
+      br = new BufferedReader(new FileReader(new File("C:/apache-tomcat-8.0.26/logs/user.log")));
+      while (br.readLine() != null) {
+
+        lines.add(br.readLine());
+      }
+
+      br.close();
+      Collections.reverse(lines);
+
+      model.addAttribute("userlog", lines);
+
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return "user_log";
+  }
+}

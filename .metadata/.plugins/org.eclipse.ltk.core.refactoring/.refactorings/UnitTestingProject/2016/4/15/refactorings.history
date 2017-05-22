@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;lib&apos;&#x0A;- Original project: &apos;UnitTestingProject&apos;&#x0A;- Destination element: &apos;lib&apos;&#x0A;- Original elements:&#x0A;     objenesis-2.2.jar&#x0A;     mockito-all-1.10.19.jar" description="Copy files" element1="lib/objenesis-2.2.jar" element2="lib/mockito-all-1.10.19.jar" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1459837508234" target="/BookStoreTDD/lib" units="0" version="1.0"/>
+</session>

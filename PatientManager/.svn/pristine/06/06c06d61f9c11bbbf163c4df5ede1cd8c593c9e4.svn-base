@@ -1,0 +1,72 @@
+package com.fdmgroup.entity;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+public class AppointmentType {
+
+	@Id
+	@Column(name= "appointment_id", nullable= false)
+	@SequenceGenerator(name="pm_appointment_sequence", sequenceName="PM_APPOINTMENT_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pm_appointment_sequence")
+	private long id;
+	
+	@Column(name= "appoinment_name", nullable= false)
+	private String name;
+	
+	@Column(name= "hourly_rate", nullable= false)
+	private BigDecimal hourlyRate;
+
+	public AppointmentType() {
+		this(0,null,null);
+	}
+
+	public AppointmentType(long id, String name, BigDecimal hourlyRate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.hourlyRate = hourlyRate;
+	}
+
+	@Override
+	public String toString() {
+		return "AppointmentType [id=" + id + ", name=" + name + ", hourlyRate=" + hourlyRate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AppointmentType other = (AppointmentType) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
+	
+
+
+	
+	
+	
+	
+}

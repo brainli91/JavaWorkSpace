@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;PatientManager&apos;&#x0A;- Original project: &apos;PatientManager&apos;&#x0A;- Original elements:&#x0A;     Appointment.java.mine&#x0A;     Appointment.java.r222&#x0A;     Appointment.java.r224" description="Delete elements" element1="src/com/fdmgroup/entity/Appointment.java.mine" element2="src/com/fdmgroup/entity/Appointment.java.r222" element3="src/com/fdmgroup/entity/Appointment.java.r224" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="3" stamp="1469757479495" subPackages="false" version="1.0"/>
+</session>

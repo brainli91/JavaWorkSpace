@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.fdmgroup.aspect.LoggingAspect" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/aspect/LoggingAspect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="597" y="1288"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.fdmgroup.auth.PasswordHash" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/auth/PasswordHash.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3044" y="808"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.fdmgroup.controller.AdminController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/AdminController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2747" y="310"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.fdmgroup.controller.ApplicantController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/ApplicantController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1557" y="202"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.fdmgroup.controller.FileUploadController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/FileUploadController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="576" y="202"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.fdmgroup.controller.HomeController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="115" y="222"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.fdmgroup.controller.InterviewController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/InterviewController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1276" y="103"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.fdmgroup.controller.LoginController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3373" y="184"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.fdmgroup.controller.ManagerController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/ManagerController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2154" y="103"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.fdmgroup.controller.ProfileController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/ProfileController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="936" y="220"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.fdmgroup.controller.RecruiterController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/RecruiterController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1871" y="238"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.fdmgroup.controller.RegistrationController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/RegistrationController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2431" y="193"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.fdmgroup.controller.UploadForm" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/UploadForm.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="589" y="1098"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.fdmgroup.controller.UserController" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/controller/UserController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3046" y="121"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.fdmgroup.dao.ApplicantProfileDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/ApplicantProfileDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1344" y="973"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.fdmgroup.dao.DBConnection" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/DBConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1440" y="2191"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.fdmgroup.dao.EducationDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/EducationDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1278" y="1699"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.fdmgroup.dao.FileDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/FileDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="678" y="859"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.fdmgroup.dao.InterviewDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/InterviewDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1037" y="901"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="com.fdmgroup.dao.IStorage" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/IStorage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1629" y="2182"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="21" language="java" name="com.fdmgroup.dao.JobApplicationDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/JobApplicationDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1628" y="856"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.fdmgroup.dao.JobDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/JobDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1876" y="874"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.fdmgroup.dao.RoleDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/RoleDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2165" y="874"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.fdmgroup.dao.UserDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/UserDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2104" y="1753"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.fdmgroup.dao.WorkHistoryDAO" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/dao/WorkHistoryDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1031" y="1699"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.fdmgroup.interceptor.RecruiterInterceptor" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/interceptor/RecruiterInterceptor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="272" y="1080"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.fdmgroup.interceptor.ManagerInterceptor" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/interceptor/ManagerInterceptor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="269" y="1326"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.fdmgroup.interceptor.AuthenticationInterceptor" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/interceptor/AuthenticationInterceptor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="275" y="1200"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.fdmgroup.interceptor.AdminInterceptor" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/interceptor/AdminInterceptor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="236" y="404"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.fdmgroup.interceptor.ApplicantInterceptor" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/interceptor/ApplicantInterceptor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="224" y="85"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.fdmgroup.model.Interview" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/Interview.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2775" y="973"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.fdmgroup.model.Role" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/Role.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3652" y="193"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="33" language="java" name="com.fdmgroup.model.InterviewType" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/InterviewType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2956" y="1699"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="34" language="java" name="com.fdmgroup.model.Job" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/Job.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3442" y="2336"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="35" language="java" name="com.fdmgroup.model.JobStatus" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/JobStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3439" y="2828"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="36" language="java" name="com.fdmgroup.model.InterviewResult" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/InterviewResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2724" y="1699"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="37" language="java" name="com.fdmgroup.model.IStorable" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/IStorable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3693" y="2756"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="com.fdmgroup.model.ApplicantProfile" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/ApplicantProfile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4106" y="382"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.fdmgroup.model.User" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3432" y="1162"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.fdmgroup.model.Education" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/Education.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4378" y="1018"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="41" language="java" name="com.fdmgroup.model.ApplicationStatus" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/ApplicationStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3165" y="2209"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="42" language="java" name="com.fdmgroup.model.FileEntity" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/FileEntity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3727" y="910"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="com.fdmgroup.model.WorkHistory" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/WorkHistory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4033" y="1018"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.fdmgroup.model.JobApplication" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/model/JobApplication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3188" y="1843"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="com.fdmgroup.ranking.ResumeRank" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/ranking/ResumeRank.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="728"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.fdmgroup.ranking.Keyword" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/ranking/Keyword.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="440" y="732"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.fdmgroup.ranking.ResumeFileReader" project="ERecruitment" 
+    file="/ERecruitment/src/com/fdmgroup/ranking/ResumeFileReader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="310" y="239"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="48">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="49" name="applicantProfileDAO"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <bendpoint x="2010" y="761"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="52" name="userDAO"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="55" name="keywords"/>      
+      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="57">    
+    <bendpoint x="2238" y="1604"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="58">    
+    <bendpoint x="3625" y="1604"/>    
+    <bendpoint x="3625" y="2123"/>    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="59">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="60" name="education"/>      
+      <multiplicity id="61" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="63" name="educationDAO"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="65">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="66" name="status"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="69" name="type"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="72" name="user"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="75" name="job"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="78" name="interviewDAO"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="81" name="dbConnection"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="83">    
+    <bendpoint x="1574" y="1604"/>    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="84">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="85" name="roleDAO"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="88" name="applicantProfile"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="91" name="fileDao"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="94" name="applicantProfile"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="96">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="97">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="98" name="applicantDAO"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="101" name="resume"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="104" name="result"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <bendpoint x="1492" y="761"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="107" name="userDAO"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="110" name="workHistory"/>      
+      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="113" name="roleDAO"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="116" name="workHistoryDAO"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="119" name="fr"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="122" name="jobDAO"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="125" name="dbConnection"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="127">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="128">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="129" name="passwordHash"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <bendpoint x="2299" y="761"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="132" name="userDAO"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="135" name="jobAppDAO"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="138" name="passwordHash"/>      
+      <multiplicity id="139" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="140">    
+    <bendpoint x="2615" y="761"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="141" name="userDAO"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="144" name="passwordHash"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="147" name="userDAO"/>      
+      <multiplicity id="148" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="150" name="users"/>      
+      <multiplicity id="151" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="153" name="interviewDAO"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="155">    
+    <bendpoint x="1683" y="1604"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="156">    
+    <bendpoint x="836" y="761"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="157" name="workHistoryDAO"/>      
+      <multiplicity id="158" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <bendpoint x="876" y="1604"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="160" name="dbConnection"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <bendpoint x="1475" y="1604"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="163" name="dbConnection"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="165">    
+    <bendpoint x="1553" y="1604"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="166" name="dbConnection"/>      
+      <multiplicity id="167" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <bendpoint x="3316" y="1604"/>    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="169" name="createdJobs"/>      
+      <multiplicity id="170" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="171">    
+    <bendpoint x="4558" y="761"/>    
+    <bendpoint x="4558" y="1604"/>    
+    <bendpoint x="4558" y="2123"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="172">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="173" name="applicantProfileDAO"/>      
+      <multiplicity id="174" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="176" name="passwordHash"/>      
+      <multiplicity id="177" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="178">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="179" name="interviews"/>      
+      <multiplicity id="180" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="181">    
+    <bendpoint x="3585" y="761"/>    
+    <bendpoint x="3604" y="1604"/>    
+    <bendpoint x="3604" y="2123"/>    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="182">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="183" name="status"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="185">    
+    <bendpoint x="857" y="761"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="186" name="educationDAO"/>      
+      <multiplicity id="187" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="188">    
+    <bendpoint x="1454" y="1604"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="189">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="190">    
+    <bendpoint x="1433" y="1604"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="191" name="dbConnection"/>      
+      <multiplicity id="192" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="194" name="jobApplication"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <bendpoint x="2320" y="761"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="197" name="userDAO"/>      
+      <multiplicity id="198" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <bendpoint x="2031" y="761"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="200" name="userDAO"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <bendpoint x="1713" y="1604"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="203" name="dbConnection"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="205">    
+    <bendpoint x="2596" y="1604"/>    
+    <bendpoint x="2596" y="2123"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <realization id="206">    
+    <bendpoint x="3583" y="1604"/>    
+    <bendpoint x="3583" y="2123"/>    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <realization id="207">    
+    <bendpoint x="3745" y="1604"/>    
+    <bendpoint x="3745" y="2123"/>    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="208">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="209" name="applicantProfile"/>      
+      <multiplicity id="210" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="211">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="212" name="roleDAO"/>      
+      <multiplicity id="213" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="214">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="215" name="roleDAO"/>      
+      <multiplicity id="216" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="217">    
+    <bendpoint x="3337" y="1604"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="218" name="jobPoster"/>      
+      <multiplicity id="219" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="220">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="221" name="applicant"/>      
+      <multiplicity id="222" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="223">    
+    <bendpoint x="3032" y="2123"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="224">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="225" name="applicantProfile"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="228" name="applicantProfileDAO"/>      
+      <multiplicity id="229" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="230">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="231" name="applicantProfileDAO"/>      
+      <multiplicity id="232" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="233">    
+    <bendpoint x="897" y="1604"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="234" name="dbConnection"/>      
+      <multiplicity id="235" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="236">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="237" name="jobApplications"/>      
+      <multiplicity id="238" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="239">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="240" name="jobDAO"/>      
+      <multiplicity id="241" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="242">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="243" name="interviewDAO"/>      
+      <multiplicity id="244" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="245">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="246" name="jobApplications"/>      
+      <multiplicity id="247" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="248">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="249" name="jobDAO"/>      
+      <multiplicity id="250" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="251">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="252" name="applicantProfileDAO"/>      
+      <multiplicity id="253" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="254">    
+    <bendpoint x="2470" y="761"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="255" name="userDAO"/>      
+      <multiplicity id="256" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="257">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="258" name="jobAppDAO"/>      
+      <multiplicity id="259" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="260">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="261">    
+    <bendpoint x="3921" y="1604"/>    
+    <bendpoint x="3921" y="2123"/>    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <realization id="262">    
+    <bendpoint x="1412" y="1604"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="263">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="264" name="dbConnection"/>      
+      <multiplicity id="265" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="266">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="267" name="role"/>      
+      <multiplicity id="268" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="269">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="270" name="jobDAO"/>      
+      <multiplicity id="271" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="true"/>
+</class-diagram>

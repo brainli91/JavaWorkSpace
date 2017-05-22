@@ -1,0 +1,38 @@
+package com.fdmgroup.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fdmgroup.dao.StaffInterviewDAO;
+import com.fdmgroup.model.StaffInterview;
+import com.fdmgroup.model.User;
+
+
+
+@Controller
+@SessionAttributes(names = { "user" }, types = { User.class })
+public class StaffController {
+	
+	
+	@Autowired
+	StaffInterviewDAO staffInterviewDAO;
+	
+	@RequestMapping(value="/viewInvitation", method = RequestMethod.GET)
+	public String viewInvitation(Model model, @ModelAttribute User user){
+		List<StaffInterview> invitationList = staffInterviewDAO.viewStaffInterviewByUser(user);
+		if (invitationList.isEmpty()) {
+			return "user_dashboard";
+		}else {
+			model.addAttribute("invitationList", invitationList);
+			return "view_invitation";
+		}
+		
+	}
+}

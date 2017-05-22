@@ -1,0 +1,152 @@
+package com.fdmgroup.entity;
+
+import java.sql.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PM_APPOINTMENTS")
+@NamedQueries({ @NamedQuery(name = "appointment.findAll", query = "SELECT ap FROM Appointment ap"),
+		@NamedQuery(name = "appointment.findAppointmentByStatus", query = "SELECT ap FROM Appointment ap WHERE ap.status =:status"),
+		@NamedQuery(name = "appointment.findAppointmentByDate", query = "SELECT ap FROM Appointment ap WHERE ap.date =:date"),
+		@NamedQuery(name = "appointment.findCurrentAppointments", query = "SELECT ap FROM Appointment ap WHERE ap.date > CURRENT_DATE") })
+public class Appointment implements IStorable {
+
+	@Id
+	@Column(name = "appointment_id", nullable = false)
+	@SequenceGenerator(name = "pm_appointment_sequence", sequenceName = "PM_APPOINTMENT_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pm_appointment_sequence")
+	private long id;
+
+	@Enumerated(EnumType.STRING)
+	// @Column(name="status") // enum: Complete, Confirmed, Not Confirmed,
+	// Rescheduled, Cancelled, No Show
+	private AppointmentStatus status;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private AppointmentType type;
+
+	@Column(name = "appointment_date")
+	private Date date;
+
+	@Column(name = "duration")
+	private float duration;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private User patient;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private User practitioner;
+
+	public Appointment() {
+		this(null, null, null, null);
+	}
+
+	public Appointment(AppointmentType type, Date date, User patient, User practitioner) {
+		super();
+		this.status = AppointmentStatus.CONFIRMED;
+		this.type = type;
+		this.date = date;
+		this.duration = 0;
+		this.patient = patient;
+		this.practitioner = practitioner;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public AppointmentStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AppointmentStatus status) {
+		this.status = status;
+	}
+
+	public AppointmentType getType() {
+		return type;
+	}
+
+	public void setType(AppointmentType type) {
+		this.type = type;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public float getDuration() {
+		return duration;
+	}
+
+	public void setDuration(float duration) {
+		this.duration = duration;
+	}
+
+	public User getPatient() {
+		return patient;
+	}
+
+	public void setPatient(User patient) {
+		this.patient = patient;
+	}
+
+	public User getPractitioner() {
+		return practitioner;
+	}
+
+	public void setPractitioner(User practitioner) {
+		this.practitioner = practitioner;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Appointment other = (Appointment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", status=" + status + ", type=" + type + ", date=" + date + ", duration="
+				+ duration + ", patient=" + patient + ", practitioner=" + practitioner + "]";
+	}
+
+}

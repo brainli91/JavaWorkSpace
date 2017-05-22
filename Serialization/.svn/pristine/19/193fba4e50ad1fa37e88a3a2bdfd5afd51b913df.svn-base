@@ -1,0 +1,25 @@
+import org.junit.Before;
+import org.junit.Test;
+
+import com.fdmgroup.Board;
+import com.fdmgroup.Wizard;
+
+
+public class SerializationTest {
+	
+	
+	@Before
+	public void setUp{
+		
+	}
+	
+	@Test
+	public void  test(){
+		
+		Board board = new Board();
+		
+		Wizard brian = new Wizard();
+		Wizard george = new Wizard();
+		
+	}
+}

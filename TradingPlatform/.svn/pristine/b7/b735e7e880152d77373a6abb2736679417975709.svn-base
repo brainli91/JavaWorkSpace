@@ -1,0 +1,88 @@
+package com.fdmgroup.tradingplatform.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fdmgroup.tradingplatform.dao.CollectionRoleDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionUserDAO;
+import com.fdmgroup.tradingplatform.model.Role;
+import com.fdmgroup.tradingplatform.model.User;
+
+public class AuthenticationController {
+
+	private CollectionUserDAO userDAO = CollectionUserDAO.getInstance();
+	private CollectionRoleDAO roleDAO = CollectionRoleDAO.getInstance();
+
+	AdminController ac = new AdminController();
+	ShareholderController sc = new ShareholderController();
+	BrokerController bc = new BrokerController();
+
+	public void logout(User user) {
+		System.out.println("You have been logged out.");
+	}
+
+	public void dashboard(User loggedInUser) {
+		for (Role role : loggedInUser.getRoles()) {
+			if (role.getName().equals("Admin"))
+				ac.printUserList();
+			if (role.getName().equals("Shareholder"))
+				sc.showPortfolio(loggedInUser);
+
+			if (role.getName().equals("Broker"))
+				bc.brokerCompanyList();
+		}
+	}
+
+	public void registerUser(String uname, String pw, String fname,  String lname, List<String> roles) {
+		
+		User existingUser = userDAO.findByUserName(uname);
+		if (existingUser != null) {
+			System.out.println("Username is already taken.");
+		}
+		
+		//Add all of the role names from the form to the new user, creating
+		//them in the database if they do not yet exist.
+		List<Role> listRoles = new ArrayList<Role>();
+		for (String name : roles) {
+			Role foundRole = roleDAO.findRoleByRoleName(name);
+			
+			if (foundRole == null) {
+				listRoles.add(foundRole);
+			}
+		}
+		User user = new User(uname, fname, lname, pw, listRoles);
+		User createdUser = userDAO.create(user);
+		
+		if (createdUser == null) {
+			System.out.println("An error occurred while processing your request. Please try again.");
+			
+		}
+		
+		System.out.println( "You've been successfully registered!");
+	}
+	
+	
+	public User login(String username, String password) {
+
+		User foundUser = userDAO.findByUserName(username);
+		if(foundUser == null){
+			System.out.println("Invalid username/password. Please try again.");
+			return null;
+		}
+		else {
+			if (foundUser.getPassWord().equals(password)){
+				System.out.println(foundUser.getUserName()+ " has logged in.");
+				System.out.println("Welcome "+ foundUser.getFirstName() );
+				dashboard(foundUser);
+				
+				return foundUser;
+			}
+		}
+		
+		return null;
+	}
+	
+}
+	
+	
+	

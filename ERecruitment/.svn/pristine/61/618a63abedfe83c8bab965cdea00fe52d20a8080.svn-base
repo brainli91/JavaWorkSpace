@@ -1,0 +1,115 @@
+$(document).ready(function() {
+	$('#createJobForm').submit(function(event) {
+		
+		if(!checkStartDate()){
+			console.log("checkstart date is false");
+			event.preventDefault();
+		}
+		if (!checkDeadline()) {
+			console.log("check deadline date is false");
+			event.preventDefault();
+		}
+
+	});
+});
+
+function checkStartDate() {
+	    var d = new Date();
+	   
+	    var day = d.getDate();
+	    var month = d.getMonth()+1;
+	    var year = d.getFullYear();
+	   
+	    var startDate = $("#startDate").val();
+	    
+	    var date1 = startDate.split("-");
+	    var sYear = date1[0];
+	    var sMonth = date1[1];
+	    var sDay = date1[2];
+	    
+	    if(year>sYear){
+	    	alert("Start year should be greater than the current year");
+	    	return false;
+	    }
+	    else if(month>sMonth){
+	    	alert("Start month should be greater than the current month");
+	    	return false;
+	    }
+	    else if(day>sDay){
+	    	alert("Start date should be greater than the current date");
+	    	return false;
+	    }
+	    else
+	    	return true;
+	}
+
+function checkDeadline() {
+    var d = new Date();
+   
+    var day = d.getDate();
+    var month = d.getMonth()+1;
+    var year = d.getFullYear();
+   
+    var deadline = $("#deadline").val();
+    console.log(deadline);
+    var date1 = deadline.split("-");
+    var sYear = date1[0];
+    var sMonth = date1[1];
+    var sDay = date1[2];
+    
+    if(year>sYear){
+    	alert("Start year should be greater than the current year");
+    	return false;
+    }
+    else if(month>sMonth){
+    	alert("Start month should be greater than the current month");
+    	return false;
+    }
+    else if(day>sDay){
+    	alert("Start date should be greater than the current date");
+    	return false;
+    }
+    else {
+    	return checkStartAndDeadline();
+    }
+}
+
+function checkStartAndDeadline() {
+	var startDate = $("#startDate").val();
+	var deadline = $("#deadline").val();
+	
+	 var deadline = deadline.split("-");
+	    var dYear = deadline[0];
+	    var dMonth = deadline[1];
+	    var dDay = deadline[2];
+	    
+	    var startDate = startDate.split("-");
+	    var sYear = startDate[0];
+	    var sMonth = startDate[1];
+	    var sDay = startDate[2];
+	    console.log("in check start and deadline");
+	    
+	    if(dYear>sYear){
+	    	alert("Start year should be greater than the deadline year");
+	    	return false;
+	    }
+	    else if(dMonth>sMonth){
+	    	alert("Start month should be greater than the deadline month");
+	    	return false;
+	    }
+	    else if(dDay>sDay){
+	    	alert("Start date should be greater than the deadline date");
+	    	return false;
+	    }
+	    else
+	    	return true;
+}
+
+
+
+
+
+
+
+
+

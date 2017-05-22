@@ -1,0 +1,133 @@
+package com.fdmgroup.tradingplatform.dao;
+
+import static org.junit.Assert.*;
+
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.fdmgroup.tradingplatform.model.Company;
+import com.fdmgroup.tradingplatform.model.Request;
+import com.fdmgroup.tradingplatform.model.User;
+
+
+
+public class CollectionRequestDAOTest {
+	
+	static CollectionRequestDAO requestDAO;
+	
+	static CollectionUserDAO userDAO;
+	static List<Request> requests;
+	
+	static Request request = new Request();
+	static Request request2 = new Request();
+	
+	static User user = new User();
+	static User user2 = new User();
+	
+	
+	
+
+	
+	@BeforeClass
+	public static void init(){
+
+		user2.setId(12);
+		user.setUserName("gz1");
+		user2.setUserName("gz2");
+
+		
+		requestDAO =  CollectionRequestDAO.getInstance();
+		userDAO =  CollectionUserDAO.getInstance();
+		requests = requestDAO.readAll();
+		request.setType("BUY");
+		request.setLimitPrice(200.00);
+		request.setMinShares(20);
+		Date requestDate = new Date(2016, 04, 25);
+		request.setRequestDate(requestDate);
+
+		request.setSharesFilled(50);
+		request.setShareholder(user);
+		request.setShareCount(50);
+		request.setStatus("Active");
+		Company company1 = new Company( "TOYS R US", 500.55);
+		request.setCompany(company1);
+		request.setStopPrice(100.00);
+		request.setTimeInForce("GOOD UNTIL CANCELLED");;
+		
+		request2.setType("BUY");
+		request2.setLimitPrice(300.00);
+		request2.setMinShares(20);
+		Date requestDate1 = new Date(2016, 04, 25);
+		request2.setRequestDate(requestDate1);
+		request2.setSharesFilled(20);
+		request2.setShareholder(user2);
+		request2.setShareCount(20);
+		request2.setStatus("GOOD UNTIL CANCELLED");
+		Company company2 = new Company("STAPLES", 200.22);
+		request2.setCompany(company2);
+		request2.setStopPrice(100.00);
+		request2.setTimeInForce("GOOD UNTIL CANCELLED");
+		requestDAO.create(request);
+		requestDAO.create(request2);
+	}
+
+	@Test
+	public void testCreate() {
+
+		assertEquals(1, (int) request.getId());
+		assertEquals(2, (int) request2.getId());
+	}
+
+	@Test
+	public void testRead() {
+
+
+		
+		assertEquals(request, requestDAO.read(1));
+		assertEquals(request2, requestDAO.read(2));
+
+	}
+	
+
+	@Test
+	public void testUpdate() {
+		request =  requestDAO.read(1);
+		request2 =  requestDAO.read(2);
+		assertEquals(request, requestDAO.update(request));
+		assertEquals(request2, requestDAO.update(request2));
+	}
+	
+
+	//@Test
+	public void testDelete() {
+
+		assertEquals(true, requestDAO.delete(request2));
+		assertEquals(true, requestDAO.delete(request));
+	}
+	
+	//@Test
+	public void testFindRequestByDate() {
+		
+		assertEquals(requestDAO.findRequestByDate(new Date(2016, 04, 25),user).size(),1);
+		assertEquals(request, requestDAO.findRequestByDate(new Date(2016, 04, 25),user).get(0) );
+	}
+	
+	@Test
+	public void testFindRequestByStatus() {
+
+		assertEquals(request, requestDAO.findRequestByStatus("Active",user).get(0) );
+	}
+	
+	@Test
+	public void testFindRequestByUser() {
+		
+		assertEquals(request, requestDAO.findRequestByUserName(user.getUserName()).get(0) );
+	}
+}
+
+

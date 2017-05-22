@@ -1,0 +1,76 @@
+package com.fdmgroup.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fdmgroup.model.StaffInterview;
+import com.fdmgroup.model.User;
+
+public class StaffInterviewDAO implements IStorage<StaffInterview> {
+
+  @Autowired
+  private DBConnection dbConnection;
+  
+
+  public StaffInterviewDAO() {
+    super();
+  }
+
+  public DBConnection getDbConnection() {
+    return dbConnection;
+  }
+
+  public void setDbConnection(DBConnection dbConnection) {
+    this.dbConnection = dbConnection;
+  }
+
+@Override
+public StaffInterview read(long id) {
+	// TODO Auto-generated method stub
+	EntityManager entityManager = dbConnection.getEntityManager();
+	StaffInterview staffInterview = entityManager.find(StaffInterview.class, id);
+	return staffInterview;
+}
+
+@Override
+public StaffInterview create(StaffInterview t) {
+	// TODO Auto-generated method stub
+	EntityManager entityManager = dbConnection.getEntityManager();
+	entityManager.getTransaction().begin();
+	entityManager.persist(t);
+	entityManager.getTransaction().commit();
+	return t;
+}
+
+@Override
+public StaffInterview update(StaffInterview t) {
+	// TODO Auto-generated method stub
+	EntityManager entityManager = dbConnection.getEntityManager();
+	entityManager.getTransaction().begin();
+	entityManager.merge(t);
+	entityManager.getTransaction().commit();
+	return null;
+}
+
+@Override
+public boolean delete(StaffInterview t) {
+	// TODO Auto-generated method stub
+	
+	return false;
+}
+
+public List<StaffInterview> viewStaffInterviewByUser(User user){
+	EntityManager entityManager = dbConnection.getEntityManager();
+	long id = user.getId();
+	Query query = entityManager.createNamedQuery("staffInterview.findStaffInterviewByUser");
+	query.setParameter("sid", id);
+	List<StaffInterview> resultList = query.getResultList();
+	return resultList;
+	
+}
+  
+}

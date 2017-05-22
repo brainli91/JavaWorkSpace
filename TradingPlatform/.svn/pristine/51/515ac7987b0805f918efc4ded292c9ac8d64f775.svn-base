@@ -1,0 +1,106 @@
+package com.fdmgroup.tradingplatform.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fdmgroup.tradingplatform.dao.CollectionCompanyDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionRequestDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionRoleDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionTradeDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionUserDAO;
+import com.fdmgroup.tradingplatform.model.Role;
+import com.fdmgroup.tradingplatform.model.User;
+
+public class AdminController {
+	private CollectionUserDAO userDAO = CollectionUserDAO.getInstance();
+	private CollectionRoleDAO roleDAO = CollectionRoleDAO.getInstance();;
+
+	public void printUserList() {
+		List<User> users = userDAO.readAll();
+		if (users == null || users.size() == 0) {
+			System.out.println("An error occurred while searching for users. Please try again.");
+		}
+		for (User user : users) {
+			System.out.println(user);
+		}
+	}
+
+	public User adminAddUser(String uname, String fname, String lname, String pw, List<String> roleNames) {
+
+		User existingUser = userDAO.findByUserName(uname);
+		if (existingUser != null) {
+			System.out.println("Username is already taken");
+		} else {
+			List<Role> listRole = new ArrayList<Role>();
+			for (String name : roleNames) {
+				Role foundRole = roleDAO.findRoleByRoleName(name);
+				listRole.add(foundRole);
+			}
+
+			User newCreatedUser = new User(uname, fname, lname, pw, listRole);
+
+			userDAO.create(newCreatedUser);
+			System.out.println("Successfully registered new user!");
+			return newCreatedUser;
+		}
+		return null;
+	}
+
+	public boolean adminDeleteUser(String uname) {
+		User targetUser = userDAO.findByUserName(uname);
+		if (targetUser != null) {
+			userDAO.delete(targetUser);
+			System.out.println("User " + targetUser.getUserName() + "," + targetUser.getFirstName() + " "
+					+ targetUser.getLastName() + "has deleted");
+		}
+
+		else {
+			System.out.println("Fail to delete");
+			return false;
+		}
+		return true;
+	}
+
+	public void adminResetPassword(String uname, String pw) {
+		User targetUser = userDAO.findByUserName(uname);
+		targetUser.setPassWord(pw);
+		if ((targetUser = userDAO.update(targetUser)) == null) {
+			System.out.println("An error occurred while processing your request. Please try again");
+		} else {
+			System.out.println(
+					"Password of user" + targetUser.getUserName() + "has been reset to:" + targetUser.getPassWord());
+		}
+	}
+
+	public User adminEditUser(String uname, String fname, String lname, List<String> roles) {
+
+		User persistentUser = userDAO.findByUserName(uname);
+
+		if (persistentUser == null) {
+			System.out.println("User could not be found. Please try again");
+		} else {
+			persistentUser.setFirstName(fname);
+			persistentUser.setLastName(lname);
+
+			List<Role> listRoles = new ArrayList<Role>();
+			for (String name : roles) {
+				Role foundRole = roleDAO.findRoleByRoleName(name);
+
+				if (foundRole == null) {
+					listRoles.add(foundRole);
+				}
+			}
+			persistentUser.setRoles(listRoles);
+
+			persistentUser = userDAO.update(persistentUser);
+		}
+		if (persistentUser == null) {
+			System.out.println("Error occurred while processing your request.Please try again.");
+		} else {
+			System.out.println("Successfully updated user" + persistentUser.getUserName());
+			return persistentUser;
+		}
+		return null;
+	}
+
+}

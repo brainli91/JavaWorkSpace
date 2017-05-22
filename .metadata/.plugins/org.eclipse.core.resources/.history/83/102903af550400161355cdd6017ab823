@@ -1,0 +1,189 @@
+package com.fdmgroup.application;
+
+import java.util.*;
+
+import com.fdmgroup.exception.AppActivationException;
+import com.fdmgroup.exception.BanUserException;
+import com.fdmgroup.exception.DeleteUserException;
+import com.fdmgroup.exception.InvalidObjectCreationException;
+import com.fdmgroup.exception.InvalidObjectDeletionException;
+import com.fdmgroup.exception.InvalidObjectReadException;
+import com.fdmgroup.exception.InvalidObjectUpdateException;
+import com.fdmgroup.exception.NewAppActivationException;
+import com.fdmgroup.exception.PasswordChangeException;
+import com.fdmgroup.exception.RemoveUserRequestException;
+import com.fdmgroup.exception.ReportErrorException;
+import com.fdmgroup.exception.UserInformationUpdateException;
+import com.fdmgroup.exception.UserRequestsNotFoundException;
+import com.fdmgroup.exception.UsersListNotFoundException;
+import com.fdmgroup.filter.*;
+import com.fdmgroup.platform.*;
+import com.fdmgroup.interfaces.*;
+import com.fdmgroup.istorables.*;
+import com.fdmgroup.appuserinfo.*;
+
+public class AdministratorApp extends Application {
+
+	private Controller_Admin ca;
+	private Administrator admin;
+
+	/* CONSTRUCTOR */
+
+	public AdministratorApp(Administrator admin) {
+		ca = Controller_Admin.getInstance();
+
+		this.admin = admin;
+	}
+
+	/* MAIN AdministratorApp METHODS */
+
+	public void viewSystemUsers() {
+		try {
+			ca.listAllSystemUsers();
+			// IMPLEMENT: Get the return of method above and display information
+		} catch (UsersListNotFoundException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewUserActivityLogs() {
+		// IMPLEMENT
+	}
+
+	public void viewSystemLogs() {
+		// IMPLEMENT
+	}
+
+	public void viewUserRequests() {
+		// IMPLEMENT: Give admin choice of which user requests to retrieve.
+		Filter_UserRequest fur = null; // SIMULATED: Change to admin's choice of
+										// Filter_UserRequest
+		try {
+			List<UserRequest> requests = ca.retrieveUserRequests(fur); // DISPLAY
+		} catch (UserRequestsNotFoundException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void addUserAccess(UserRequest urToProcess) {
+		// viewUserRequests() first
+		urToProcess.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.processAddUserAccess(urToProcess);
+		} catch (AppActivationException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void addNewUserAccess(UserRequest urToProcess) {
+		// viewUserRequests() first
+		urToProcess.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.processAddNewUserAccess(urToProcess);
+		} catch (NewAppActivationException e) {
+			// Record for system logs
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void changeUserPassword(UserRequest urToProcess) {
+		// viewUserRequests() first
+		urToProcess.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.processChangeUserPassword(urToProcess);
+		} catch (PasswordChangeException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void updateUserInfo(UserRequest urToProcess) {
+		// viewUserRequests() first
+		urToProcess.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.processUpdateUserInfo(urToProcess);
+		} catch (UserInformationUpdateException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void readErrorReport(UserRequest urToProcess) {
+		// viewUserRequests() first
+		urToProcess.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.processReadErrorReport(urToProcess);
+		} catch (ReportErrorException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void rejectUserRequest(UserRequest urToReject) {
+		// viewUserRequests() first
+		urToReject.setAdminHandlerID(this.getAdmin().getAdminID());
+		try {
+			ca.removeUserRequest(urToReject);
+		} catch (RemoveUserRequestException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void deleteUser(int idToDelete) {
+		// viewSystemUsers() first
+		try {
+			ca.deleteUserFromSystem(idToDelete);
+		} catch (DeleteUserException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		} catch (InvalidObjectDeletionException e) {
+			// Record for system logs
+		}
+	}
+
+	public void banUser(int idToBan) {
+		// viewSystemUsers() first
+		try {
+			ca.banUserFromSystem(idToBan);
+		} catch (BanUserException e) {
+			// Record for system logs
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	/* GETTERS and SETTERS */
+
+	@Override
+	public IInformation getAppUser() {
+		return this.admin;
+	}
+
+	public Administrator getAdmin() {
+		return this.admin;
+	}
+
+}

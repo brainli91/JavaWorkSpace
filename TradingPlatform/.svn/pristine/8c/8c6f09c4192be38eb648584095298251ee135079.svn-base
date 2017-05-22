@@ -1,0 +1,146 @@
+package com.fdmgroup.tradingplatform.controller;
+
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
+import com.fdmgroup.tradingplatform.dao.CollectionCompanyDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionRequestDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionTradeDAO;
+import com.fdmgroup.tradingplatform.dao.CollectionUserDAO;
+import com.fdmgroup.tradingplatform.model.Company;
+import com.fdmgroup.tradingplatform.model.Request;
+import com.fdmgroup.tradingplatform.model.Role;
+import com.fdmgroup.tradingplatform.model.Trade;
+import com.fdmgroup.tradingplatform.model.User;
+
+
+
+
+
+public class ShareholderController {
+
+	private CollectionCompanyDAO companyDAO = CollectionCompanyDAO.getInstance();
+	private CollectionRequestDAO requestDAO = CollectionRequestDAO.getInstance();
+	private CollectionTradeDAO tradeDAO = CollectionTradeDAO.getInstance();
+	private CollectionUserDAO userDAO = CollectionUserDAO.getInstance();
+	
+	//display the page with purchasing shares
+//	public void index(){
+//		List<Company> companies  = companyDAO.readAll();
+//		List<Request> requests = requestDAO.readAll();
+//		if (companies == null){
+//			System.out.println("An error occurred while processing your request. Please try again.");
+//		}
+//		else{
+//			System.out.println("-----Puchasing Shares-----");
+//			for (Request request : requests){
+//				if (request.getType().equals("BUY")){
+//					System.out.println(request.getCompany().getName()+ "|" +request.getCompany().getId()+"|" +request.getShareCount()+"|"+ request.getLimitPrice()+"|"+request.getStopPrice());
+//				}
+//			}
+//		}
+//	}
+	public String profile(User user) {
+		User targetUser = userDAO.read(user.getId());
+		String info = "----- Profile -----\nUsername: " + targetUser.getUserName() + "\nName: "
+				+ targetUser.getFirstName() + " " + targetUser.getLastName() + "\nRole: " + targetUser.getRoles();
+		return info;
+	}
+
+	public void changeProfile(User userAttribute) {
+		User persistentUser = userDAO.read(userAttribute.getId());
+
+		if (persistentUser == null) {
+			System.out.println("User could not be found. Please try again");
+		} else {
+			persistentUser.setFirstName(userAttribute.getFirstName());
+			persistentUser.setLastName(userAttribute.getLastName());
+			persistentUser.setRoles(userAttribute.getRoles());
+
+			persistentUser = userDAO.update(persistentUser);
+		}
+		if (persistentUser == null) {
+			System.out.println("Error occurred while processing your request.Please try again.");
+		} else {
+			System.out.println("Successfully updated user profile");
+		}
+		System.out.println(profile(persistentUser));
+
+	}
+
+	public HashMap<Integer, Integer> showPortfolio(User loggedInUser) {
+
+		loggedInUser.setPortfolio(tradeDAO.portfolioForuser(loggedInUser));
+		System.out.println("***Portfolio***");
+		for (Integer key : loggedInUser.getPortfolio().keySet()) {
+			System.out.println(companyDAO.findByStockId(key).getName() + " : " + loggedInUser.getPortfolio().get(key));
+
+		}
+
+		return null;
+
+	}
+
+	public ShareholderController() {
+		super();
+	}
+
+	public void buy(Request buyRequest, Integer companyId, User loggedInUser) {
+		buyRequest.setCompany(companyDAO.read(companyId));
+		buyRequest.setRequestDate(new Date(Calendar.getInstance().getTime().getTime()));
+		buyRequest.setShareholder(userDAO.read(loggedInUser.getId()));
+		buyRequest.setSharesFilled(0);
+		buyRequest.setStatus("ACTIVE");
+		buyRequest.setType("BUY");
+		requestDAO.create(buyRequest);
+		if(requestDAO.create(buyRequest) !=null){
+			System.out.println("An error occurred while processing your request. Please try again.");
+			showPortfolio(loggedInUser);
+		}
+		else{
+			System.out.println("Request Sent.");
+			showPortfolio(loggedInUser);
+		}
+	}
+	
+	public void sell(Request sellRequest, Integer companyId, User loggedInUser){
+		sellRequest.setCompany(companyDAO.read(companyId));
+		sellRequest.setRequestDate(new Date(Calendar.getInstance().getTime().getTime()));
+		sellRequest.setShareholder(userDAO.read(loggedInUser.getId()));
+		sellRequest.setSharesFilled(0);
+		sellRequest.setStatus("ACTIVE");
+		sellRequest.setType("SELL");
+		requestDAO.create(sellRequest);
+		
+		if(requestDAO.create(sellRequest) !=null){
+			System.out.println("An error occurred while processing your request. Please try again.");
+		}
+		else{
+			System.out.println("Request Sent.");			
+		}
+		showPortfolio(loggedInUser);
+	}
+	
+	public void requestsHistoryView(User loggedInUser){
+		//display requests for the logged in user from the session
+		List<Request> requests = requestDAO.findRequestByUser(loggedInUser);
+		if(requests == null){
+			System.out.println("An error occurred while processing your request. Please try again.");
+		}
+		for (Request request:requests){
+			System.out.println(request.toString());
+		}
+	}
+	
+	public void tradeHistoryView(User loggedInUser){
+		List<Trade> trades = tradeDAO.findTradeByUser(loggedInUser);
+		if(trades == null){
+			System.out.println("An error occurred while processing your request. Please try again.");
+		}
+		for (Trade trade:trades){
+			System.out.println(trade.toString());
+		}
+	}
+}

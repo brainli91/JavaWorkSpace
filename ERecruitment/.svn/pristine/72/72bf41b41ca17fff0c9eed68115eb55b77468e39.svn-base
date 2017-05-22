@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <jsp:include page="common/head.jsp"></jsp:include>
+  <link rel= "stylesheet" type="text/css" href="static/css/userpage_css.css">
+  <title>Applied Jobs</title>
+</head>
+
+<body>
+
+  <jsp:include page="navbar.jsp"></jsp:include>
+<div id="wrapper">
+	<jsp:include page="sidebar.jsp"></jsp:include>
+    <div id="main-wrapper" class="col-md-11 pull-right">
+    	<div id="main">
+   <main>
+    <section>
+      <h2>Your Job Applications</h2>
+      <br/>
+      
+      <table id="jobTable" class="table table-striped table-bordered display">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th>Start Date</th>
+            <th>Application Deadline</th>
+            <th>Number Of Positions</th>
+            <th>Status</th>
+            <th>Job Info</th>
+            <!-- <th>Interviews</th> -->
+          </tr>
+        </thead>
+  
+        <tbody>
+          <c:forEach var="jobApp" items="${jobApps}" varStatus="jobAppCounter">
+            <tr>
+              <td>${jobAppCounter.count}</td>
+              <td>${jobApp.job.title}</td>
+              <td>${jobApp.job.description}</td>
+              <td style="white-space:nowrap;">${jobApp.job.startDate}</td>
+              <td style="white-space:nowrap;">${jobApp.job.deadlineDate}</td>
+              <td>${jobApp.job.numOfPositions}</td>
+              <td>${jobApp.status.name}</td>
+              <td align="center">
+                <a href="applicantViewApplication?jobId=${jobApp.job.id}&applicationStatus=${jobApp.status.name}"><i class="glyphicon glyphicon-eye-open" style="font-size:20px;"></i></a>
+              </td>
+              
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>  
+    </section>
+  </main>
+            </div>
+	<jsp:include page="footer.jsp"></jsp:include>          
+        </div>
+</div>
+
+  
+</body>
+</html>

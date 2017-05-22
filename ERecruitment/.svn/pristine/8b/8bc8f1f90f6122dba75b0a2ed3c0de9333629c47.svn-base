@@ -1,0 +1,48 @@
+$(document).ready(function() {
+	$('#createJobForm').submit(function(event) {
+
+		var email = $('#email').val();
+		var password = $('#password').val();
+		var passwordAgain = $('#passwordAgain').val();
+		var firstName = $('#firstName').val();
+		var lastName = $('#lastName').val();
+		var errors = '';
+		
+		if($('#email').val().length > 24) {
+			errors += '<li>Email cannot be longer than 24 characters</li>';
+			event.preventDefault();
+		}
+
+		if($('#password').val().length < 8) {
+			errors += '<li>Password cannot be shorter than 8 characters</li>';
+			event.preventDefault();
+		}
+		else if($('#password').val().length > 24) {
+			errors += '<li>Password cannot be longer than 24 characters</li>';
+			event.preventDefault();
+		}
+		
+		if($('#firstName').val().length > 24) {
+			errors += '<li>First name cannot be longer than 24 characters</li>';
+			event.preventDefault();
+		}
+		
+		if($('#lastName').val().length > 24) {
+			errors += '<li>First name cannot be longer than 24 characters</li>';
+			event.preventDefault();
+		}
+		
+		if (!comparePasswords($('#password').val(), $('#passwordAgain').val())) {
+			errors += '<li> passwords do not match </li>';
+		}
+
+		if (errors && errors.length > 0) {
+			$('#errors').html(errors);
+			event.preventDefault();
+		}
+	});
+});
+
+function comparePasswords(password, passwordAgain) {
+	return password === passwordAgain
+}

@@ -1,0 +1,14 @@
+package com.fdmgroup.applicationtest;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class AdministratorAppTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	} 
+
+}

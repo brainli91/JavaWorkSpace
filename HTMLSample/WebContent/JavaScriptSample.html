@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>JavaScript Sample</title>
+		<link rel ="stylesheet" type = "text/css" href ="css/MyCSS.css">
+		<script type = "text/javascript"  src ="js/myjs.js"></script>
+	</head>
+	<body>
+		<p onclick="showMessage('Paragragh Clicked')" id = "p1"> This is paragraph</p>
+		<button onclick="showHide('div1')"> Show/Hide </button>
+		<button onclick="showMessage('Button Clicked')"> Show </button>
+	
+	
+	<div id = "div1">
+		<p> Another paragraph.....</p>
+	</div>
+	<div id = "div2">
+		<p> Third paragraph.....</p>
+	</div>
+	<form method= "get" action ="http://www.google.com/search" id ="form1">
+		<label>Query:</label>
+		<input type="text" name="q" id="qTF">
+		<input type="text" name="qCopy" id="qTFCopy">
+		
+	</form>
+	<button onclick ="submitForm()">Search</button><br/>
+	<button onclick ="checkVar()">Check</button><br/>
+	<button onclick ="changeParagraph()">Change Text</button>
+	</body>
+</html>

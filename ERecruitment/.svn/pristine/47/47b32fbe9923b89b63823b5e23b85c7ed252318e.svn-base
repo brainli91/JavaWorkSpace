@@ -1,0 +1,8 @@
+<div class="row footer">
+		<a class="fa fa-facebook" href="http://www.facebook.com" target="_blank"></a>&nbsp;&nbsp;
+		<a class="fa fa-linkedin" href="https://www.linkedin.com" target="_blank"></a>&nbsp;&nbsp;
+		<a class="fa fa-twitter" href="https://twitter.com" target="_blank"></a>&nbsp;&nbsp;   
+		<a class="fa fa-google-plus" href="https://plus.google.com" target="_blank"></a>&nbsp;&nbsp;
+		<a class="fa fa-youtube" href="https://youtube.com" target="_blank"></a>&nbsp;&nbsp;
+		<span class="pull-right">&copy; 2016 FDM E-Recruitment. All rights reserved</span>
+</div>

@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"  %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="common/head.jsp"></jsp:include>
+<link rel= "stylesheet" type="text/css" href="static/css/userpage_css.css">
+<title>Invitation Page</title>
+</head>
+<body>
+
+<header>
+<jsp:include page="navbar.jsp"></jsp:include>
+</header>
+
+
+<main>
+	<section>
+		<!-- Your Main Body Content goes here -->
+		<!-- If you want to change the position of the main(which contains the content) then create a new user_head.jsp and new css for it and just reposition main
+		but just copy and paste the original user_head.jsp, and user_page_css.css -->
+		<h2>Interview Invitations</h2>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Job Title</th>
+					<th>Date</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${invitationList}" var="invitation"
+					varStatus="">
+					<tr>
+						<td>${invitation.interview.jobApplication.job.title}</td>
+						<td>${invitation.interview.date}</td>
+						<td>${invitation.interview.jobApplication.applicant.firstName}</td>
+						<td>${invitation.interview.jobApplication.applicant.lastName}</td>
+						<td>${invitation.status}</td>
+						<td>
+							<form role="form" >
+							    <label class="radio-inline">
+							      <input type="radio" name="optradio" value="accept">Accept
+							    </label>
+							    <label class="radio-inline">
+							      <input type="radio" name="optradio" value="reject">Reject
+							    </label>
+							    <label class="inline">
+							    	<button type="submit" class="btn btn-default">Submit</button>
+							    </label>
+  							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+    
+	</section>
+</main>
+			
+		
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+package com.fdmgroup.controller;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
+import com.fdmgroup.dao.InterviewDAO;
+import com.fdmgroup.dao.JobApplicationDAO;
+import com.fdmgroup.dao.JobDAO;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.model.Interview;
+import com.fdmgroup.model.InterviewResult;
+import com.fdmgroup.model.InterviewType;
+import com.fdmgroup.model.Job;
+import com.fdmgroup.model.JobApplication;
+import com.fdmgroup.model.Role;
+import com.fdmgroup.model.User;
+
+public class RecruiterControllerTest {
+
+  @Spy
+  JobDAO jobDAO;
+
+  @Mock
+  UserDAO mockedUserDAO;
+
+  @Mock
+  InterviewDAO mockedInterviewDAO;
+
+  @Mock
+  Model model;
+
+  @Mock
+  User user;
+
+  @Mock
+  List<Job> jobs;
+
+  @Mock
+  Job job;
+
+  @Mock
+  BindingResult br;
+
+  @Mock
+  JobApplicationDAO mockedJobAppDAO;
+
+  @InjectMocks
+  RecruiterController recruiterController;
+
+  @Before
+  public void setUp() throws Exception {
+
+    recruiterController = new RecruiterController();
+    initMocks(this);
+    when(br.hasErrors()).thenReturn(false);
+    when(jobDAO.findAll()).thenReturn(jobs);
+  }
+
+  @Test
+  public void testDisplayRecruiterDashboard() {
+    String view = recruiterController.displayRecruiterDashboard(model, user);
+    assertEquals("recruiter_dashboard", view);
+    verify(model).addAttribute("jobs", jobs);
+  }
+
+  @Test
+  public void testCreateJobView() {
+
+    String createJob = recruiterController.createOrEditJob(model, user, null);
+    Job job = new Job();
+    job.setJobPoster(user);
+    verify(model).addAttribute("job", job);
+    assertEquals("create_job", createJob);
+  }
+
+  @Test
+  public void testPostingAJobSuccess() {
+    when(jobDAO.create(job)).thenReturn(job);
+
+    String postJob = recruiterController.postJob(model, user, job, br, "");
+    verify(jobDAO).create(job);
+    assertEquals("recruiter_dashboard", postJob);
+  }
+
+  @Test
+  public void testPostingAJobNotASuccess() {
+    when(jobDAO.create(job)).thenReturn(null);
+    String postJob = recruiterController.postJob(model, user, job, br, "");
+    verify(jobDAO).create(job);
+    assertEquals("create_job", postJob);
+  }
+
+  @Test
+  public void testViewJob() {
+    String viewJob = recruiterController.recruiterViewJob(model, "1");
+    assertEquals("view_job", viewJob);
+  }
+
+  @Test
+  public void testAddOrEditInterview_interviewCreationFailed_verifyErrorMsgSet() {
+    Date date = new Date();
+    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    Interview interview = new Interview(InterviewType.PHONE, sqlDate);
+
+    when(mockedInterviewDAO.create(interview)).thenReturn(null);
+
+    assertEquals("create_interview",
+        recruiterController.addOrEditInterview(model, interview, null, Long.toString(interview.getId())));
+    verify(model).addAttribute("errorMsg", "Interview cannot be scheduled");
+  }
+
+  @Test
+  public void testAddOrEditInterview_interviewCreationSuccess_verifySuccessMsgSet() {
+    Date date = new Date();
+    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    Interview interview = new Interview(InterviewType.PHONE, sqlDate);
+    Interview createdInterview = new Interview(InterviewType.PHONE, sqlDate);
+    interview.setResult(InterviewResult.PENDING);
+    createdInterview.setResult(InterviewResult.PENDING);
+    createdInterview.setId(12);
+
+    when(mockedInterviewDAO.create(interview)).thenReturn(createdInterview);
+
+    assertEquals("view_interviews",
+        recruiterController.addOrEditInterview(model, interview, null, Long.toString(interview.getId())));
+    verify(model).addAttribute("successMsg", "Interview successfully scheduled");
+  }
+
+  @Test
+  public void testAddOrEditInterview_editExistingInterview_interviewEditFailed_verifyErrorMsgSent() {
+    Date date = new Date();
+    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    Interview interview = new Interview(InterviewType.PHONE, sqlDate);
+    interview.setId(15000);
+
+    when(mockedInterviewDAO.update(interview)).thenReturn(null);
+
+    assertEquals("create_interview",
+        recruiterController.addOrEditInterview(model, interview, null, Long.toString(interview.getId())));
+    verify(model).addAttribute("errorMsg", "Interview cannot be scheduled");
+  }
+
+  @Test
+  public void testAddOrEditInterview_editExistingInterview_interviewEditSuccess_verifySuccessMsgSent() {
+    Date date = new Date();
+    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    Interview interview = new Interview(InterviewType.PHONE, sqlDate);
+    interview.setResult(InterviewResult.PASS);
+    interview.setId(10);
+
+    when(mockedInterviewDAO.update(interview)).thenReturn(interview);
+
+    assertEquals("view_interviews",
+        recruiterController.addOrEditInterview(model, interview, null, Long.toString(interview.getId())));
+    verify(model).addAttribute("successMsg", "Interview successfully scheduled");
+  }
+
+  @Test
+  public void testViewProfile_ApplicantDoesNotExist_returnErrorPage() {
+    when(mockedUserDAO.read(15000)).thenReturn(null);
+
+    assertEquals("error_page", recruiterController.viewJobApplicantProfile(model, "15000"));
+  }
+
+  @Test
+  public void testViewProfile_ApplicantExists_returnProfilePage() {
+    when(mockedUserDAO.read(12)).thenReturn(
+        new User("foo@foo.com", "4fd5a6432562d4g56ew4df5ew4r63e", "Foo", "Foolast", new Role(1, "applicant")));
+
+    assertEquals("view_applicant", recruiterController.viewJobApplicantProfile(model, "12"));
+  }
+
+  @Test
+  public void testViewInterviews_ApplicationDoesNotExist_verifyErrorMsgSet() {
+    when(mockedJobAppDAO.read(15000)).thenReturn(null);
+
+    assertEquals("view_interviews", recruiterController.viewJobApplicationInterviews(model, "15000"));
+    verify(model).addAttribute("errorMsg", "Application does not exist.");
+  }
+
+  @Test
+  public void testViewInterviews_ApplicationExists_verifySuccessMsgSet() {
+    JobApplication jobApp = new JobApplication(user, job);
+    Set<Interview> interviews = jobApp.getInterviews();
+
+    when(mockedJobAppDAO.read(12)).thenReturn(jobApp);
+
+    assertEquals("view_interviews", recruiterController.viewJobApplicationInterviews(model, "12"));
+    verify(model).addAttribute("jobApplication", jobApp);
+    verify(model).addAttribute("jobInterviews", interviews);
+  }
+
+  @Test
+  public void testViewAllJobs_verifySetOfJobsSet() {
+    List<Job> jobs = jobDAO.findAll();
+    assertEquals("view_all_jobs", recruiterController.viewAllJobs(model, user));
+    verify(model).addAttribute("jobs", jobs);
+  }
+
+  @Test
+  public void testEditJob_jobDoesNotExist_returnViewAllJobsView() {
+    when(jobDAO.read(15000)).thenReturn(null);
+
+    assertEquals("view_all_jobs", recruiterController.createOrEditJob(model, user, "15000"));
+    verify(model).addAttribute("errorMsg", "Job does not exist.");
+  }
+
+  @Test
+  public void testEditJob_jobExists_returnCreateJobView() {
+    when(jobDAO.read(12)).thenReturn(job);
+
+    assertEquals("create_job", recruiterController.createOrEditJob(model, user, "12"));
+    verify(model).addAttribute("job", job);
+  }
+
+}

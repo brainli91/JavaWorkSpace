@@ -1,0 +1,68 @@
+package com.fdmgroup.dao;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fdmgroup.entity.Appointment;
+import com.fdmgroup.entity.AppointmentStatus;
+
+public class AppointmentDAO implements IStorage<Appointment>{
+
+	@Autowired
+	DBConnection dbConnection;
+	
+	
+	public AppointmentDAO() {
+		super();
+	}
+
+	
+	public DBConnection getDbConnection() {
+		return dbConnection;
+	}
+
+
+	public void setDbConnection(DBConnection dbConnection) {
+		this.dbConnection = dbConnection;
+	}
+
+
+	@Override
+	public Appointment read(long id) {
+		EntityManager em = dbConnection.getEntityManager();
+		
+		return em.find(Appointment.class, id);
+	}
+
+	@Override
+	public Appointment create(Appointment ap) {
+		EntityManager em = dbConnection.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(ap);
+		em.getTransaction().commit();
+		return ap;
+	}
+
+	@Override
+	public Appointment update(Appointment ap) {
+		EntityManager em = dbConnection.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(ap);
+		em.getTransaction().commit();
+		return ap;
+	}
+
+	@Override
+	public boolean delete(Appointment ap) {
+		EntityManager em  = dbConnection.getEntityManager();
+		em.getTransaction().begin();
+		ap.setStatus(AppointmentStatus.CANCELLED);
+		em.merge(ap);
+		em.getTransaction().commit();
+		return false;
+	}
+	
+	
+
+}

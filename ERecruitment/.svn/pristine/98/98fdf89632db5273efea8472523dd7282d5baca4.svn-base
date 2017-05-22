@@ -1,0 +1,65 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div id="sidebar-wrapper" class="col-md-1">
+	<div id="sidebar">
+      <ul class="nav list-group">
+        <li>
+          <a class="list-group-item" href="dashboard"><i class="icon-home icon-1x"></i>Dashboard</a>
+        </li>
+    	<c:choose>
+          <c:when test="${sessionScope.user.role.name == 'applicant'}">
+              <li>
+                  <a class="list-group-item" href="viewMyProfile"><i class="icon-home icon-1x"></i>View Profile</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="editProfile"><i class="icon-home icon-1x"></i>Edit Profile</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="viewJobPostings"><i class="icon-home icon-1x"></i>Browse Jobs</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="applicantViewJobApps"><i class="icon-home icon-1x"></i>Your Job Applications</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="applicantViewInterviews"><i class="icon-home icon-1x"></i>View Your Interviews</a>
+              </li>
+          </c:when>
+          <c:when test="${sessionScope.user.role.name == 'recruiter'}">
+              <li>
+                  <a class="list-group-item" href="viewAllJobs"><i class="icon-home icon-1x"></i>Browse All Jobs</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="createOrEditJobView?jobId="><i class="icon-home icon-1x"></i>Create Job Posting</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="viewAllRecruiterJobs"><i class="icon-home icon-1x"></i>Your Posted Jobs</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="recruiterViewInterviews"><i class="icon-home icon-1x"></i>View Your Interviews</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="viewStatistics"><i class="icon-home icon-1x"></i>View Statistics</a>
+              </li>
+          </c:when>
+          <c:when test="${sessionScope.user.role.name == 'admin'}">
+              <li>
+                  <a class="list-group-item" href="viewUsers"><i class="icon-home icon-1x"></i>View All Users</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="createUser"><i class="icon-home icon-1x"></i>Create New User</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="userLog"><i class="icon-home icon-1x"></i>View User Log</a>
+              </li>
+              <li>
+                  <a class="list-group-item" href="systemLog"><i class="icon-home icon-1x"></i>View System Log</a>
+              </li>
+          </c:when>
+          <c:when test="${sessionScope.user.role.name == 'manager'}">
+              <li>
+                  <a class="list-group-item" href="viewStatistics"><i class="icon-home icon-1x"></i>View Statistics</a>
+              </li>
+          </c:when>
+        </c:choose>  
+      </ul>      
+	</div>
+</div>

@@ -1,0 +1,33 @@
+package com.fdmgroup.appuserinfo;
+
+import com.fdmgroup.interfaces.*;
+
+public class Administrator implements IInformation {
+
+	private int adminID;
+	private String adminUsername;
+	private String adminName;
+
+	/* CONSTRUCTOR */
+
+	public Administrator(int uid, String uname, String name) {
+		this.adminID = uid;
+		this.adminUsername = uname;
+		this.adminName = name;
+	}
+
+	/* GETTERS */
+
+	public int getAdminID() {
+		return this.adminID;
+	}
+
+	public String getAdminUsername() {
+		return this.adminUsername;
+	}
+
+	public String getAdminName() {
+		return this.adminName;
+	}
+
+}

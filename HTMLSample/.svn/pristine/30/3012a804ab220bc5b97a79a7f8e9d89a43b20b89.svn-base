@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>JavaScript Sample</title>
+		<link rel ="stylesheet" type = "text/css" href ="css/MyCSS.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script type = "text/javascript"  src ="js/myjs2.js"></script>
+	</head>
+	<body>
+		<progress id ="prg1" max ="100" value="0">This shows your JavaScript skill</progress>
+		<p id = "p1"> This is paragraph</p>
+		<button id ="b1"> Show/Hide </button>
+	
+	<br/>
+	<br/>
+	<br/>
+	<div id = "div1">
+		<p> Another paragraph.....</p>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<form method= "get" action ="http://www.google.com/search" id ="form1">
+		<label>Query:</label>
+		<input type="text" name="q" id="qTF">
+		<br/>
+		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		<input type="text" name="qCopy" id="qTFCopy">
+		<input type="text" name="email" id="emailTF">
+		
+	</form>
+	<button id = "b2">Copy</button><br/>
+	<button id = "b3">Make Progress</button><br/>
+	<button id = "b4">Validation</button><br/>
+	</body>
+</html>

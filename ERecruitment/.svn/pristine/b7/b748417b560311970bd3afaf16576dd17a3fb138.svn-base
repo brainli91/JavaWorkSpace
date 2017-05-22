@@ -1,0 +1,192 @@
+html,header, footer, body, nav, div, img, a,ul, li, h1, h2{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style-type: none;
+}
+*{box-sizing: border-box;}
+html{
+	font-size: 14px;
+}
+body{
+    background-image: url(../img/user_background.jpg); 
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 80%;
+	margin:0 auto;
+/*
+	color: #444;
+	border: 1px solid #ccc;
+*/
+	font-family: helvetica;
+}
+
+h1, h2{
+	text-align: center;
+	
+}
+
+table, th{
+	text-align: center;
+}
+
+table{
+	color: white;
+}
+
+th{
+	background-color: #20222a;
+	color: white;
+}
+a:link, a:visited{
+	color:#555;
+	font-weight: 700;
+	transition: .2s color ease-in-out;
+}
+a:hover, a:active{
+    color: white;
+}
+
+/*styling content*/
+main{
+    position: relative;
+    top: 50px;
+	padding: 1.5rem;
+	line-height: 2.6rem;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+}
+
+section>p{
+	text-indent: 2.6rem;
+}
+footer{
+    background: #00b4de; color: #fbfbfb;  text-align: center; padding: 2em 0;
+}
+
+/*styling the header part*/
+.toggle-menu{
+	display: none;
+}
+header{
+	margin:2rem 0;
+}
+.site-title img{
+	max-width: 100px;
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-filter: grayscale(90%);
+	-moz-filter: grayscale(90%);
+	filter: grayscale(90%);
+}
+
+.nav-list{
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+	align-items: center;
+	white-space: nowrap;
+}
+.nav-list > li {
+	position: relative;
+}
+
+.nav-list>li:not(.has-logo)>a{
+	text-transform: uppercase;
+	display: block;
+	padding:1rem;
+	color: white;
+}
+
+.nav-list ul{
+	position: absolute;
+	z-index: 1010;
+	background-color: #fff;
+	line-height: 2rem;
+	left: -9999px;	
+}
+
+.nav-list ul a{
+	font-weight: normal;
+	display: block;
+	padding: .5rem 1rem;
+    color: black;
+}
+
+.nav-list > li:hover a + ul{
+	left: 0;
+	top:100%;
+}
+
+tr{
+	background-color: white;
+	color: black;
+}
+
+tr td a:hover{
+	color: black;
+}
+
+.mobile-display{
+	display: none;
+}
+
+@media only screen and (max-width: 58.75rem){
+	html{
+		font-size: 13px;
+	}
+	body{
+		width: 80%;
+	}
+	.has-logo{
+		display: none;
+	}
+	.mobile-display{
+		display: block;
+		margin:2rem auto;
+		text-align: center
+	}
+}
+@media only screen and (max-width: 33.68rem){
+	.toggle-menu{
+		display: block;
+		max-width: -webkit-min-content;
+		max-width: -moz-min-content;
+		max-width: min-content;
+		margin: 1rem auto;
+		background-color: #393939;
+		text-align: center;
+		color: #fff !important;
+		padding: 1rem;
+		border-radius: .25em;
+
+	}
+	.toggle-menu:hover{background-color: #f92266;}
+
+	.nav-list{
+		display: block;
+		width: 100%;
+		position: static;
+		line-height: 1rem;
+		z-index: 1012;
+		left: 0;
+		top:0;
+		background-color: #fff;
+		
+		max-height: 0;
+		overflow: hidden;
+	
+	}
+
+	.active{
+		max-height: 100%;
+		overflow: auto;
+	}
+
+
+	.nav-list  ul{
+		position: static;
+		text-indent: 2rem;
+		z-index: 1013;
+	}
+}

@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+  pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <jsp:include page="common/head.jsp"></jsp:include>
+  <link rel= "stylesheet" type="text/css" href="static/css/userpage_css.css">
+  <title>View Jobs</title>
+</head>
+
+<body>
+<jsp:include page="navbar.jsp"></jsp:include>
+<div id="wrapper">
+	<jsp:include page="sidebar.jsp"></jsp:include>
+    <div id="main-wrapper" class="col-md-11 pull-right">
+    	<div id="main">
+            	<!-- main content goes here -->
+            	 <main>
+    <section>
+  	  <h2>All Posted Jobs</h2>
+      <br/>
+      
+      <div style="text-align: center;">
+        <a href="createOrEditJobView?jobId=">
+          <button type="button" class="btn btn-default">Add Job</button>
+        </a>
+      </div>
+      <table id="jobTable" class="table table-striped table-bordered display">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th style="white-space:nowrap;">Start-Date</th>
+            <th>Application Deadline</th>
+            <th>Number Of Positions</th>
+            <th>Number of Applicants</th>
+            <th>Status</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <c:forEach var="job" items="${jobs}" varStatus="jobCounter">
+            <tr>
+              <td>${jobCounter.count}</td>
+              <td>${job.title}</td>
+              <td>${job.description}</td>
+              <td style="white-space:nowrap;">${job.deadlineDate}</td>
+              <td style="white-space:nowrap;">${job.startDate}</td>
+              <td>${job.numOfPositions}</td>
+              <td>${fn:length(job.jobApplications)}</td>
+              <td>${job.status.name}</td>
+              <td align="center">
+              	<a href="recruiterViewJob?jobId=${job.id}"><i class="glyphicon glyphicon-eye-open" style="font-size:20px;"></i></a>
+              </td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>  
+    </section>
+  </main>
+            </div>
+	<jsp:include page="footer.jsp"></jsp:include>          
+        </div>
+</div>
+</body>
+</html>

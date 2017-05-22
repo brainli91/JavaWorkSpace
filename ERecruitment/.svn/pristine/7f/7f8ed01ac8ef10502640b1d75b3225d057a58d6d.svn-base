@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+  pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <jsp:include page="common/head.jsp"></jsp:include>
+  <link rel= "stylesheet" type="text/css" href="static/css/userpage_css.css">
+  <title>View Interviews</title>
+</head>
+
+<body>
+
+  <div class="navbar-row">
+    <header>
+      <jsp:include page="navbar.jsp"></jsp:include>
+    </header>
+  </div>
+  
+  <main>
+    <section>
+      
+      <h2>
+        List of Interviews
+      </h2>
+    
+      <table id="jobTable" class="table display" cellspacing="0" width="100%">
+      <c:choose>
+            <c:when test="${sessionScope.user.role.name == 'applicant'}">
+            	<thead>
+		          <tr>
+		            <th>#</th>
+		            <th>Job Title</th>
+		            <th>Date</th>
+		            <th>Type</th>
+		            <th>Result</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <c:forEach var="interviewItem" items="${interviews}" varStatus="interviewCounter">
+		            <tr>
+		              <td>${interviewCounter.count}</td>
+		              <td>${interviewItem.jobApplication.job.title}</td>
+		              <td>${interviewItem.date}</td>
+		               <td>${interviewItem.type }</td>
+		              <td>${interviewItem.result}</td>
+		            </tr>
+		          </c:forEach>
+		        </tbody>
+            </c:when>
+      <c:otherwise>
+        <thead>
+		          <tr>
+		            <th>#</th>
+		            <th>Date</th>
+		            <th>Job Title</th>
+		            <th>Type</th>
+		            <th>Status</th>
+		            <th>Applicant Name</th>
+		          </tr>
+		        </thead>
+		      
+		        <tbody>
+		          <c:forEach var="interviewItem" items="${interviews}" varStatus="interviewCounter">
+		            <tr>
+		              <td>${interviewCounter.count}</td>
+		              <td>${interviewItem.interview.date}</td>
+		              <td>${interviewItem.interview.jobApplication.job.title}</td>
+		              <td>${interviewItem.interview.type }</td>
+		              <td>${interviewItem.status}</td>
+		              <td>${interviewItem.interview.jobApplication.applicant.firstName } ${interviewItem.interview.jobApplication.applicant.lastName }</td>
+		            </tr>
+		          </c:forEach>
+		        </tbody>
+    	</c:otherwise>
+        </c:choose>
+      </table>
+      
+      <button type="button" class="btn btn-default">Go Back</button>
+    </section>
+  </main>
+
+</body>
+</html>

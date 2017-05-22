@@ -1,0 +1,123 @@
+package com.fdmgroup.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ER_STAFF_INTERVIEW")
+@NamedQueries({
+	@NamedQuery(name="staffInterview.findStaffInterviewByUser", query = "SELECT si FROM StaffInterview si WHERE si.staff.id = :sid")
+})
+public class StaffInterview implements IStorable {
+
+  @Id
+  @Column(name = "staff_interview_id")
+  @SequenceGenerator(name = "er_staff_interview_sequence", sequenceName = "ER_STAFF_INTERVIEW_SEQ", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "er_staff_interview_sequence")
+  private long id;
+
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private User staff;
+
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Interview interview;
+
+  @Column(name = "comment_col")
+  private String comment;
+
+  @Enumerated(EnumType.STRING)
+  private InvitationStatus status;
+
+  public StaffInterview() {
+    this(null, null);
+  }
+
+  public StaffInterview(User staff, Interview interview) {
+    super();
+    this.staff = staff;
+    this.interview = interview;
+    this.comment = null;
+    this.status = InvitationStatus.PENDING;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public User getStaff() {
+    return staff;
+  }
+
+  public void setStaff(User staff) {
+    this.staff = staff;
+  }
+
+  public Interview getInterview() {
+    return interview;
+  }
+
+  public void setInterview(Interview interview) {
+    this.interview = interview;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+  public InvitationStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(InvitationStatus status) {
+    this.status = status;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (int) (id ^ (id >>> 32));
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    StaffInterview other = (StaffInterview) obj;
+    if (id != other.id)
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "StaffInterview [id=" + id + ", staff=" + staff + ", interview=" + interview + ", comment=" + comment
+        + ", status=" + status + "]";
+  }
+
+}

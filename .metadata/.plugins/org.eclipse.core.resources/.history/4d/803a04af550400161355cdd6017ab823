@@ -1,0 +1,234 @@
+package com.fdmgroup.application;
+
+import java.util.*;
+import java.util.logging.Logger;
+
+import org.apache.log4j.PropertyConfigurator;
+
+import com.fdmgroup.platform.*;
+import com.fdmgroup.exception.AcceptClientException;
+import com.fdmgroup.exception.CancelMarketOrderException;
+import com.fdmgroup.exception.ClientRequestsNotFoundException;
+import com.fdmgroup.exception.CompletedOrdersNotFoundException;
+import com.fdmgroup.exception.InvalidMarketOrderException;
+import com.fdmgroup.exception.InvalidObjectCreationException;
+import com.fdmgroup.exception.InvalidObjectDeletionException;
+import com.fdmgroup.exception.InvalidObjectReadException;
+import com.fdmgroup.exception.InvalidObjectUpdateException;
+import com.fdmgroup.exception.MarketOrdersNotFoundException;
+import com.fdmgroup.exception.RejectClientException;
+import com.fdmgroup.exception.RemoveTradeRequestException;
+import com.fdmgroup.exception.ShareholderPartnersException;
+import com.fdmgroup.exception.TradeRequestsNotFoundException;
+import com.fdmgroup.istorables.*;
+import com.fdmgroup.appuserinfo.*;
+
+public class BrokerApp extends Application {
+
+	private Controller_Broker cb;
+	private Broker broker;
+	static Logger userActivityLog = Logger
+			.getLogger("LoggingUserActivity.class");
+
+	/* CONSTRUCTOR */
+
+	public BrokerApp(Broker broker) {
+		cb = Controller_Broker.getInstance();
+
+		this.broker = broker;
+
+		PropertyConfigurator.configure("useractivityconfig.properties");
+	}
+
+	/* MAIN BrokerApp METHODS */
+
+	public void viewShareholdersList() {
+		try {
+			List<Shareholder> partners = cb
+					.listCurrentShareholderPartners(this.broker.getBrokerID()); // DISPLAY
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Viewed list of shareholder partners");
+		} catch (ShareholderPartnersException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewClientRequests() {
+		try {
+			List<ClientRequest> requests = cb
+					.listOutstandingClientRequests(this.broker); // DISPLAY
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Viewed list of outstanding client requests");
+		} catch (ClientRequestsNotFoundException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewTradeRequests() {
+		try {
+			List<TradeRequest> requests = cb
+					.listOutstandingTradeRequests(this.broker); // DISPLAY
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Viewed list of outstanding trade requests");
+		} catch (TradeRequestsNotFoundException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewCurrentMarketOrders() {
+		try {
+			List<MarketOrder> marketOrderList = cb
+					.listCurrentMarketOrders(this.broker); // DISPLAY
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Viewed outstanding market orders");
+		} catch (MarketOrdersNotFoundException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void viewCompletedTrades() {
+		try {
+			List<TradeRequest> completedTrades = cb
+					.listBrokerPastTrades(this.broker.getBrokerID()); // DISPLAY
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Viewed completed trades ");
+		} catch (CompletedOrdersNotFoundException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectReadException e) {
+			// Record for system logs
+		}
+	}
+
+	public void defineCommission(double fr, double per) {
+		this.broker.setCommissionFlatrate(fr);
+		this.broker.setCommissionPercentage(per);
+
+		userActivityLog.info(this.broker.getBrokerUsername()
+				+ "(broker) -- Defined commission rates");
+	}
+
+	public void acceptClient(ClientRequest crToAccept) {
+		// viewClientRequests() first
+		try {
+			cb.acceptClientByBroker(crToAccept, this.broker);
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Accepted a client request");
+		} catch (AcceptClientException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void rejectClient(ClientRequest crToReject) {
+		// viewClientRequests() first
+		try {
+			cb.rejectClientByBroker(crToReject);
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Rejected a client request");
+		} catch (RejectClientException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		}
+	}
+
+	public void createMarketOrder(TradeRequest trToAccept) {
+		// viewTradeRequests() first
+		MarketOrder mo = new MarketOrder(trToAccept.getTradeType(),
+				trToAccept.getStock(), trToAccept.getAmount(),
+				trToAccept.getBrokerID());
+
+		try {
+			cb.addMarketOrder(trToAccept, mo);
+
+			userActivityLog
+					.info(this.broker.getBrokerUsername()
+							+ "(broker) -- Accepted a trade request and created a market order");
+		} catch (InvalidMarketOrderException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectUpdateException e) {
+			// Record for system logs
+		} catch (InvalidObjectCreationException e) {
+			// Record for system logs
+		}
+	}
+
+	public void cancelMarketOrder(MarketOrder moToCancel) {
+		try {
+			cb.cancelMarketOrder(moToCancel);
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Cancelled a market order");
+		} catch (CancelMarketOrderException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectDeletionException e) {
+			// Record for system logs
+		}
+	}
+
+	public void rejectTradeRequest(TradeRequest trToReject) {
+		// viewTradeRequests() first
+		try {
+			cb.removeTradeRequest(trToReject);
+
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ "(broker) -- Rejected a trade request");
+		} catch (RemoveTradeRequestException e) {
+			userActivityLog.info(this.broker.getBrokerUsername()
+					+ " -- EXCEPTION: " + e.getMessage());
+		} catch (InvalidObjectDeletionException e) {
+			// Record for system logs
+		}
+	}
+
+	/* GETTERS and SETTERS */
+
+	@Override
+	public Broker getAppUser() {
+		return this.broker;
+	}
+
+	public double getCommissionFlatrate() {
+		return this.getAppUser().getCommissionFlatrate();
+	}
+
+	public void setCommissionFlatrate(double d) {
+		this.getAppUser().setCommissionFlatrate(d);
+	}
+
+	public double getCommissionPercentage() {
+		return this.getAppUser().getCommissionPercentage();
+	}
+
+	public void setCommissionPercentage(double d) {
+		this.getAppUser().setCommissionPercentage(d);
+	}
+
+}

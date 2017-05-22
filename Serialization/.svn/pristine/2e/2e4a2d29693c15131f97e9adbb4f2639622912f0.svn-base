@@ -1,0 +1,14 @@
+package com.fdmgroup;
+
+public class Power {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private String name;
+	private int addHPs;
+	private int loseHPs;
+	private int 
+	
+	
+
+}

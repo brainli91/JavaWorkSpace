@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="jdk.nashorn.internal.ir.annotations.Ignore"/>
+<fullyQualifiedTypeName name="org.junit.Ignore"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="org.omg.Messaging.SyncScopeHelper"/>
+<fullyQualifiedTypeName name="game.GameObject"/>
+<fullyQualifiedTypeName name="java.util.MissingFormatArgumentException"/>
+<fullyQualifiedTypeName name="overriding.Subclass"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.model.Request"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.model.Trade"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.dao.CollectionRoleDAO"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.model.User"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.databasedao.DataSource"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.databasedao.UserDAO_JDBC"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.dao.IRequestDAO"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.dao.ITradeDAO"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ArrayBlockingQueue"/>
+<fullyQualifiedTypeName name="java.sql.CallableStatement"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.databasedao.TradeDAO_JDBC"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.model.Company"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.databasedao.RequestDAO_JDBC"/>
+<fullyQualifiedTypeName name="com.fdmgroup.tradingplatform.databasedao.CompanyDAO_JDBC"/>
+<fullyQualifiedTypeName name="com.fdmgroup.dao.UserDAO"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+<fullyQualifiedTypeName name="org.apache.poi.util.SystemOutLogger"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
+</qualifiedTypeNameHistroy>

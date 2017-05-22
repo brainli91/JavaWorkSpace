@@ -1,0 +1,138 @@
+package com.fdmgroup.model;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ER_JOB_APPLICATION")
+public class JobApplication implements IStorable, Comparable<JobApplication> {
+
+  @Id
+  @Column(name = "job_application_id")
+  @SequenceGenerator(name = "er_job_application_sequence", sequenceName = "ER_JOB_APPLICATION_SEQ", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "er_job_application_sequence")
+  private long id;
+
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private User applicant;
+
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Job job;
+
+  @OneToMany(mappedBy = "jobApplication")
+  private Set<Interview> interviews;
+
+  // Represents how well the applicant's resume matches the keywords described in the job
+  // description. The higher the better.
+  @Column(name = "score")
+  private float score;
+
+  @Enumerated(EnumType.STRING)
+  private ApplicationStatus status;
+
+  public JobApplication() {
+    this(null, null);
+  }
+
+  public JobApplication(User applicant, Job job) {
+    super();
+    this.applicant = applicant;
+    this.job = job;
+    this.score = 0; // Score should be calculated in the constructor
+    this.status = ApplicationStatus.PENDING; // Default status should be pending...
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public Job getJob() {
+    return job;
+  }
+
+  public void setJob(Job job) {
+    this.job = job;
+  }
+
+  public float getScore() {
+    return score;
+  }
+
+  public void setScore(float score) {
+    this.score = score;
+  }
+
+  public ApplicationStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(ApplicationStatus status) {
+    this.status = status;
+  }
+
+  public User getApplicant() {
+    return applicant;
+  }
+
+  public void setApplicant(User applicant) {
+    this.applicant = applicant;
+  }
+
+  public Set<Interview> getInterviews() {
+    return interviews;
+  }
+
+  public void setInterviews(Set<Interview> interviews) {
+    this.interviews = interviews;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (int) (id ^ (id >>> 32));
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JobApplication other = (JobApplication) obj;
+    if (id != other.id)
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "JobApplication [id=" + id + ", job=" + job + ", score=" + score + ", status=" + status + "]";
+  }
+
+  @Override
+  public int compareTo(JobApplication other) {
+    return Float.compare(other.score, this.score);
+  }
+
+}

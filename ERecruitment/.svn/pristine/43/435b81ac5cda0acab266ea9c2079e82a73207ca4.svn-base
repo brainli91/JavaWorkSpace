@@ -1,0 +1,84 @@
+@CHARSET "ISO-8859-1";
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.header-row {
+	background-color: black;
+	text-align: center;
+}
+
+.header {
+	height: 15%;
+	margin-top: 1em;
+}
+
+.footer {
+	height: 5%;
+	width: 100%; 
+	padding: 5px;
+	background-color: #333;
+	position: absolute;
+}
+
+.mainArea {
+	height: 80%;
+	width: 100%;
+	
+}
+
+.mainBody, html {
+	color: white;
+	height: 99%;
+	
+}
+
+.container {
+	height: 100%;
+	position: relative;
+}
+
+.side-bar {
+	background-color: black;
+	height: 100%;
+	/* position: relative;
+	bottom: 5px; */
+}
+
+.mainArea-col1 {
+	height: 100%;
+	width: 100%;
+}
+
+.mainArea-col2 {
+	height: 100%;
+	width: 100%;
+}
+
+.side-bar ul li a:hover{
+	background-color: #FF8000 !important;
+}
+
+.header-row {
+	height: 50%;
+}
+.navbar-row {
+	height: 50%;
+}
+
+.navbar {
+	height: 100%;
+}
+
+.navbar-nav li a:hover {
+	background-color: #FF8000 !important;
+}
+
+
+

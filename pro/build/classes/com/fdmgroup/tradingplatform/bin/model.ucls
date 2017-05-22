@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="com.fdmgroup.tradingplatform.bin.CurrentStockStats" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/CurrentStockStats.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="260" width="189" x="170" y="83"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.fdmgroup.tradingplatform.bin.Portfolio" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Portfolio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="278" width="490" x="483" y="491"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.fdmgroup.tradingplatform.bin.Trade" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Trade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="638" width="342" x="-113" y="809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.fdmgroup.tradingplatform.bin.CurrentShareholderShares" 
+    project="TradingPlatform" file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/CurrentShareholderShares.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="260" width="205" x="269" y="809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.fdmgroup.tradingplatform.bin.SecurityRole" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/SecurityRole.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="260" width="168" x="514" y="809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.fdmgroup.tradingplatform.bin.UserRole" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/UserRole.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="165" x="1013" y="491"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.fdmgroup.tradingplatform.bin.Person" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Person.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="404" width="317" x="1260" y="809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.fdmgroup.tradingplatform.bin.Company" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Company.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="314" width="217" x="681" y="83"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.fdmgroup.tradingplatform.bin.RoleFactory" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/RoleFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="225" x="1220" y="2165"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.fdmgroup.tradingplatform.bin.Role" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Role.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="228" x="1220" y="1703"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.fdmgroup.tradingplatform.bin.Request" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/Request.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="854" width="477" x="722" y="809"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.fdmgroup.tradingplatform.bin.TradingPlatform" project="TradingPlatform" 
+    file="/TradingPlatform/src/com/fdmgroup/tradingplatform/bin/TradingPlatform.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="368" width="286" x="1220" y="83"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="13">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="14" name="portfolio"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="17" name="requests"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <bendpoint x="1208" y="491"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="20" name="request"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="23" name="securityRole"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <bendpoint x="1229" y="491"/>    
+    <bendpoint x="1229" y="809"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="26" name="role"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <bendpoint x="1250" y="491"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="29" name="persons"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="32" name="roles"/>      
+      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="35" name="currentShareholderShares"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <bendpoint x="1271" y="491"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="38" name="person"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="41" name="trades"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="44" name="person"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="47" name="roleFactory"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="50" name="userRole"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

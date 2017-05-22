@@ -1,0 +1,68 @@
+package com.fdmgroup.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fdmgroup.auth.PasswordHash;
+import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.model.User;
+
+@Controller
+@SessionAttributes(names = { "user" }, types = { User.class })
+public class UserController {
+
+  @Autowired
+  @Qualifier("userDAO")
+  UserDAO userDAO;
+
+  @Autowired
+  @Qualifier("password")
+  PasswordHash passwordHash;
+  
+  @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+  public String showDashboard(Model model, @ModelAttribute User user) {
+    if (user.getRole().getName().equals("applicant")) {
+      return "redirect:/applicantDashboard";
+    } else if (user.getRole().getName().equals("recruiter")) {
+      return "redirect:recruiterView";
+    } else if (user.getRole().getName().equals("admin")) {
+      return "redirect:adminDashboard";
+    } else if (user.getRole().getName().equals("staff")) {
+
+    }
+    return "redirect:login";
+  }
+
+  @RequestMapping(value = "/editCurrentUser")
+  public String showCurrentUserForm(Model model, @ModelAttribute User user) {
+
+	User editUser = userDAO.read(user.getId());
+	model.addAttribute("editUser", editUser);
+	  System.out.println("0" + editUser);
+    return "edit_user_form";
+  }
+
+  @RequestMapping(value = "/editCurrentUser", method = RequestMethod.POST)
+  public String editCurrentUser(Model model, User user, @ModelAttribute User editUser, @RequestParam String password) {
+	  System.out.println("1" + editUser);
+	if(password != null && !password.isEmpty()){ 
+		System.out.println("2" + editUser);
+		editUser.setPassword(passwordHash.hash(password));
+	}
+	 System.out.println("3" + editUser);
+    userDAO.update(editUser);
+    System.out.println("<--------------->");
+    System.out.println(editUser);
+    model.addAttribute("successMessage", "User Info updated");
+    
+    return "applicant_dashboard";
+  }
+
+}

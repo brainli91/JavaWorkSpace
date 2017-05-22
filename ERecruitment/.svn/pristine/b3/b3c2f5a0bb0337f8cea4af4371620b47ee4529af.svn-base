@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="common/head.jsp"></jsp:include>
+<link rel= "stylesheet" type="text/css" href="static/css/navbar_css.css">
+<title>E-Recruitment</title>
+</head>
+<body>
+
+<div class="navbar-row">
+<header>
+<jsp:include page="navbar.jsp"></jsp:include>
+</header>
+</div>
+
+
+<!-- <div class="container">
+	<div class="row row1">
+		<div class="col-sm-8"> -->
+<div class="main-row">
+<main>
+	<section>
+		<h1><strong>FDM E-Recruitment </h1></strong>
+		<p>Join FDM's Academy Program to become a professional Consultant</p>
+		<a href="register"><button type="button" class="btn btn-secondary btn-lg">Apply Now</button></a>
+	</section>
+</main>
+</div>
+			
+		
+<!-- 		</div>
+	</div>	
+</div>  -->
+
+<%-- <%@ include file="footer.jsp" %> --%>
+
+
+
+
+
+</body>
+</html>

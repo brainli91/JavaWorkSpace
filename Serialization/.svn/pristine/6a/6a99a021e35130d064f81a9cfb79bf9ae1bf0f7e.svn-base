@@ -1,0 +1,42 @@
+package com.fdmgroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Wizard extends Player{
+	
+	private static final long serialVersionUID = 1L;
+	
+	private transient Backpack backpack = new Backpack();
+	
+	private List<Shield> shields = new ArrayList<Shield>();
+	
+	private List<Power> powers = new ArrayList<Power>();
+
+	public Backpack getBackpack() {
+		return backpack;
+	}
+
+	public void setBackpack(Backpack backpack) {
+		this.backpack = backpack;
+	}
+
+	public List<Shield> getShields() {
+		return shields;
+	}
+
+	public void setShields(List<Shield> shields) {
+		this.shields = shields;
+	}
+
+	public List<Power> getPowers() {
+		return powers;
+	}
+	
+	public void setPowers(List<Power> powers) {
+		this.powers = powers;
+	}
+
+	
+	
+}

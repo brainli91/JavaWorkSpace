@@ -1,0 +1,103 @@
+.navbar-brand {
+	font-size: 20px !important;
+	font-style: inherit;
+	margin-left: 0;
+}
+
+.navbar {
+	margin-bottom: 0;
+	background-color: #6600ff;
+	z-index: 10;
+	border: 0;
+	font-size: 13px !important;
+	line-height: 1.42857143 !important;
+	letter-spacing: 4px;
+	border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+	color: #6600ff !important;
+	background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+	color: #fff !important;
+}
+
+.btn {
+	margin-left: 15px;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	width: 70%;
+	margin: auto;
+}
+
+.carousel-inner {
+	background-color: #ffffff;
+}
+
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+	color: #6600ff;
+}
+
+.carousel-indicators li {
+	border-color: #ccffff;
+}
+
+.carousel-indicators li.active {
+	background-color: #ccffff;
+}
+
+.item h4 {
+	font-size: 19px;
+	line-height: 1.375em;
+	font-style: italic;
+}
+
+.item span {
+	font-style: normal;
+}
+
+.logo-small {
+	color: #6600ff;
+	font-size: 50px;
+}
+
+body {
+	padding: 50px;
+}
+
+.modal-dialog {
+	margin: 0 auto;
+	padding-top: 150px;
+	width: 300px;
+}
+
+.modal-footer {
+	height: 70px;
+	margin: 0;
+	padding-right: 15%;
+}
+
+.modal-footer .btn {
+	font-weight: bold;
+}
+
+.modal-footer .progress {
+	display: none;
+	height: 32px;
+	margin: 0;
+}
+
+.input-group-addon {
+	color: #fff;
+	background: #3276B1;
+}
+

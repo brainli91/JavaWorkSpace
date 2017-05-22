@@ -1,0 +1,62 @@
+//In class practice
+package com.fdmgroup;
+
+public class Greet {
+
+	public static void main(String[] args){
+		
+	    int num1 = Integer.parseInt(args[0]);
+		int num2 = Integer.parseInt(args[0]);
+		 
+		Arthemetic ar = new Arthemetic();
+		ar.setNum1(num1);
+		ar.setNum2(num2);
+		
+		System.out.println("Hello World!");
+		System.out.println(ar.add());
+		System.out.println(args[2]);
+		
+		ar.showEvenNumbers(54, 147);
+		
+		//System.out.println(ar.isPrime(150));
+		ar.switchExample(1);
+		
+		
+		double d[] = {7,0,-78.0, 45.21, 32.97, -13.64, 12.25,9.0};
+		System.out.println(ar.calculateAverage(d));
+		int [][] matrix  ={{23,12},{-9,45}};
+		
+		String st1 = "Hello ";
+		String st2 = "Hello ";
+	    
+		StringBuffer sb = new StringBuffer(st1);
+		System.out.println(sb.reverse());
+		
+
+	    st1 = st1.concat(st2);
+	   /* if (st1 == st2)
+	    	System.out.println("Two identical strings.");*/
+	    
+	/*	public static int add (int a, int b){
+			return a + b;
+		}
+		
+	*/
+/*	    public static int countChar(char c, String st){
+	    	int count = 0;
+	    	int index = 0;
+	    	
+	    	while ((index = st.indexOf(c,index))!= -1){
+	    		count++;
+	    		index++;
+	    	}
+	    	return count;
+	    }*/
+	    //.lastIndexOf
+	    	//"Hello World" find 'l': 2,3,9
+	    MyCalender mc = new MyCalender();
+	    System.out.println("@@@@@@@@@@@@@@");
+	    System.out.println(mc.getTodayDateAndTime());
+	}
+}
+	

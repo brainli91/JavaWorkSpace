@@ -1,0 +1,205 @@
+package com.fdmgroup.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name = "PM_USERS")
+@NamedQueries({@NamedQuery(name="user.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name="user.findByEmail", query="SELECT u FROM User u WHERE u.email = :email"),
+	@NamedQuery(name="user.findByFirstName", query="SELECT u FROM User u WHERE u.firstName LIKE :firstName"),
+	@NamedQuery(name="user.findByLastName", query="SELECT u FROM User u WHERE u.lastName LIKE :lastName"),
+	@NamedQuery(name="user.findByActive", query="SELECT u FROM User u WHERE u.active = 1"),
+	@NamedQuery(name="user.findCurrentBirthday", query="SELECT u FROM User u WHERE u.profile.birthdate = CURRENT_DATE")
+	
+	})
+public class User implements IStorable {
+
+	@Id
+	@Column(name = "user_id", nullable = false)
+	@SequenceGenerator(name = "pm_user_sequence", sequenceName = "PM_USERS_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pm_user_sequence")
+	private long id;
+
+	@Column(name = "email", nullable = false, length = 64, unique=true)
+	private String email;
+
+	@Column(name = "pw", nullable = false)
+	private String password;
+
+	@Column(name = "first_name", nullable = false, length = 32)
+	private String firstName;
+
+	@Column(name = "last_name", nullable = false, length = 32)
+	private String lastName;
+
+	@Column(name = "active", nullable = false)
+	private int active;
+
+	@Transient
+	private String fullName;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Role role;
+
+	@OneToOne(mappedBy = "user")
+	private Profile profile;
+
+	@OneToMany(mappedBy = "patient")
+	private Set<Appointment> appointments;
+
+	@OneToMany(mappedBy = "patient")
+	private Set<Transaction> transactions;
+
+	public User() {
+		this(null, null, null, null, null);
+	}
+
+	public User(String email, String password, String firstName, String lastName, Role role) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.active = 1;
+		this.role = role;
+		this.profile = null;
+		this.appointments = new HashSet<>();
+		this.transactions = new HashSet<>();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public boolean isActive() {
+		return getActive() != 0;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", active=" + active + ", fullName=" + fullName + ", role=" + role
+				+ ", profile=" + profile + ", appointments=" + appointments + ", transactions=" + transactions + "]";
+	}
+
+}
